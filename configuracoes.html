@@ -1,0 +1,116 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Configurações — Casa Maria de Magdala</title>
+  <link rel="stylesheet" href="{% static 'css/interface/sistema.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/interface/configuracoes.css' %}" />
+</head>
+<body>
+
+  <nav class="nav-topo">
+    <a href="/interface/sistema/" class="nav-voltar">← Voltar ao Painel</a>
+    <span class="nav-titulo">Casa Maria de Magdala</span>
+    <a href="/interface/login/" class="nav-sair">Sair</a>
+  </nav>
+
+  <main class="container-principal">
+    <div class="cabecalho-pagina">
+      <h1>Configurações</h1>
+      <p class="subtitulo">Configurações do sistema e histórico de alterações</p>
+    </div>
+
+    <!-- SEÇÃO 1: Dados da ONG -->
+    <section class="secao-config">
+      <h2>Dados da ONG</h2>
+      <div class="grade-config">
+        <div class="campo-form">
+          <label for="nomeOng">Nome da ONG</label>
+          <input type="text" id="nomeOng" value="Casa Maria de Magdala" />
+        </div>
+        <div class="campo-form">
+          <label for="enderecoOng">Endereço</label>
+          <input type="text" id="enderecoOng" value="Estrada Washington Luís, 123 - Petrópolis, RJ" />
+        </div>
+        <div class="campo-form">
+          <label for="emailOng">E-mail de Contato</label>
+          <input type="email" id="emailOng" value="contato@casamariademagdala.org" />
+        </div>
+        <div class="campo-form">
+          <label for="telefoneOng">Telefone</label>
+          <input type="tel" id="telefoneOng" value="(24) 2222-1234" />
+        </div>
+      </div>
+      <div class="acoes-secao">
+        <button class="botao-primario" onclick="window.salvarConfig()">Salvar Configurações</button>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 2: Histórico de Alterações -->
+    <section class="secao-config">
+      <h2>Histórico de Alterações</h2>
+      <div class="tabela-wrapper">
+        <table class="tabela-dados" id="tabelaLog">
+          <thead>
+            <tr>
+              <th>Data/Hora</th>
+              <th>Usuário</th>
+              <th>Ação</th>
+              <th>Módulo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>12/11/2026 17:30</td>
+              <td>Giowanna</td>
+              <td>Editou "Fonoaudiologia"</td>
+              <td><span class="badge-modulo">Especialidades</span></td>
+            </tr>
+            <tr>
+              <td>12/11/2026 17:00</td>
+              <td>Giowanna</td>
+              <td>Adicionou horário Fisioterapia — Quarta</td>
+              <td><span class="badge-modulo">Agenda</span></td>
+            </tr>
+            <tr>
+              <td>12/11/2026 16:00</td>
+              <td>Luiz Guilherme</td>
+              <td>Cadastrou profissional "Cristina"</td>
+              <td><span class="badge-modulo">Profissionais</span></td>
+            </tr>
+            <tr>
+              <td>10/11/2026 14:00</td>
+              <td>Giowanna</td>
+              <td>Atualizou horário Pintura — Quarta</td>
+              <td><span class="badge-modulo">Agenda</span></td>
+            </tr>
+            <tr>
+              <td>10/11/2026 10:00</td>
+              <td>Sistema</td>
+              <td>Login realizado</td>
+              <td><span class="badge-modulo">Acesso</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="acoes-secao">
+        <button class="btn-modal-sec" onclick="window.limparLog()">Limpar Log</button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Toast -->
+  <div class="toast-sucesso" id="toastSucesso"></div>
+
+  <!-- Rodapé -->
+  <footer class="rodape-links">
+    <a href="/interface/usuarios/">Usuários</a>
+    <a href="/interface/sistema/">Painel</a>
+  </footer>
+
+  <script src="{% static 'js/interface/configuracoes.js' %}"></script>
+</body>
+</html>

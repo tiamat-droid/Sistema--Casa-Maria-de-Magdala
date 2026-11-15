@@ -1,0 +1,668 @@
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+:root {
+
+    --azul: #168ce5;
+
+    --cinza-texto: #333333;
+
+    --cinza-label: #777777;
+
+    --cinza-borda: #dddddd;
+
+    --cinza-botao: #c7c7c7;
+
+    --branco: #ffffff;
+
+    --fundo: #f5f5f5;
+}
+
+
+
+
+body {
+
+    width: 100%;
+    min-height: 100vh;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    background-color: var(--fundo);
+}
+
+
+
+.pagina-login {
+
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+
+    align-items: stretch;
+}
+
+
+
+.area-login {
+
+    width: 55%;
+    min-height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background-color: var(--branco);
+}
+
+
+.conteudo-login {
+
+    width: 100%;
+    max-width: 470px;
+
+    padding: 50px;
+}
+
+
+.indicador {
+
+    width: 12px;
+    height: 12px;
+
+    margin-bottom: 8px;
+
+    border-radius: 50%;
+
+    background-color: #cccccc;
+}
+
+
+
+.conteudo-login h1 {
+
+    margin-bottom: 38px;
+
+    color: var(--cinza-texto);
+
+    font-size: 40px;
+
+    font-weight: 400;
+
+    line-height: 1.2;
+}
+
+
+.formulario-login {
+
+    width: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+.campo {
+
+    width: 100%;
+
+    margin-bottom: 30px;
+
+    display: flex;
+
+    flex-direction: column;
+}
+
+.campo label {
+
+    margin-bottom: 5px;
+
+    color: var(--cinza-label);
+
+    font-size: 9px;
+
+    font-weight: 400;
+}
+
+
+
+.campo input {
+
+    width: 100%;
+    height: 36px;
+
+    padding: 0 10px;
+
+    border: 1px solid var(--cinza-borda);
+
+    border-radius: 5px;
+
+    outline: none;
+
+    background-color: white;
+
+    color: var(--cinza-texto);
+
+    font-size: 14px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+
+.campo input:focus {
+
+    border-color: var(--azul);
+
+    box-shadow:
+        0 0 0 2px rgba(22, 140, 229, 0.12);
+}
+
+
+
+.senha-cabecalho {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+
+
+.mostrar-senha {
+
+    padding: 0;
+
+    border: none;
+
+    background: transparent;
+
+    color: #999999;
+
+    font-size: 9px;
+
+    cursor: pointer;
+}
+
+
+.mostrar-senha:hover {
+
+    color: var(--azul);
+}
+
+
+.botao-acessar {
+
+    width: 92px;
+    height: 32px;
+
+    margin-top: 0;
+
+    border: none;
+
+    border-radius: 18px;
+
+    background-color: var(--cinza-botao);
+
+    color: white;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.botao-acessar:hover {
+
+    background-color: var(--azul);
+
+    transform: translateY(-1px);
+}
+
+
+.botao-acessar:active {
+
+    transform: translateY(0);
+}
+
+
+
+
+.area-visual {
+    position: relative;
+    width: 45%;
+    min-height: 100vh;
+    overflow: hidden;
+    background-color: #0d1520;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Carrossel de fotos da ONG no fundo */
+.carrossel-login {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.area-visual .slide-login {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transform: scale(1.04);
+    transition: opacity 1.2s ease-in-out, transform 9s ease-out;
+}
+
+.area-visual .slide-login.ativo {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Filtro escuro por cima p/ ver bem as fotos e destacar o texto branco */
+.filtro-escuro-login {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: linear-gradient(
+        180deg,
+        rgba(10, 16, 28, 0.56) 0%,
+        rgba(14, 22, 36, 0.66) 50%,
+        rgba(10, 16, 28, 0.74) 100%
+    );
+}
+
+/* Camada com o coração, título e descrição por cima do filtro */
+.conteudo-visual-login {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    color: #ffffff;
+    padding: 40px;
+    max-width: 460px;
+}
+
+.icone-coracao-login {
+    width: 72px;
+    height: 72px;
+    background: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 16px;
+    margin: 0 auto 24px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+/* Logo da pomba c/ laço do tamanho exato q ficava o coração */
+.area-visual .img-logo-login {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    clip-path: circle(45.5% at 50% 50%);
+    object-fit: cover;
+    display: block;
+}
+
+.conteudo-visual-login h2 {
+    font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+}
+
+.conteudo-visual-login p {
+    font-size: 15px;
+    opacity: 0.95;
+    line-height: 1.6;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.45);
+}
+
+/* Bolinhas do carrossel */
+.indicadores-carrossel {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 26px;
+}
+
+.bolinha-carrossel {
+    width: 9px;
+    height: 9px;
+    border-radius: 999px;
+    border: none;
+    background: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    padding: 0;
+    transition: all 0.3s ease;
+}
+
+.bolinha-carrossel.ativa {
+    width: 24px;
+    background: #ffffff;
+}
+
+
+
+@media (max-width: 900px) {
+
+    .area-login {
+        width: 55%;
+    }
+
+    .area-visual {
+        width: 45%;
+    }
+
+    .conteudo-login {
+        padding: 40px;
+    }
+
+    .conteudo-login h1 {
+        font-size: 34px;
+    }
+}
+
+
+
+
+@media (max-width: 700px) {
+
+    .pagina-login {
+
+        min-height: 100vh;
+
+        flex-direction: column;
+    }
+
+
+    .area-visual {
+
+        order: 1;
+
+        width: 100%;
+
+        min-height: 220px;
+        max-height: 280px;
+    }
+
+
+    .area-login {
+
+        order: 2;
+
+        width: 100%;
+
+        min-height: auto;
+    }
+
+
+    .conteudo-login {
+
+        max-width: 500px;
+
+        padding: 45px 30px;
+    }
+
+
+    .conteudo-login h1 {
+
+        font-size: 32px;
+
+        margin-bottom: 35px;
+    }
+}
+
+
+
+
+@media (max-width: 400px) {
+
+    .area-visual {
+
+        min-height: 180px;
+    }
+
+
+    .conteudo-login {
+
+        padding: 35px 22px;
+    }
+
+
+    .conteudo-login h1 {
+
+        font-size: 28px;
+    }
+
+
+    .campo {
+
+        margin-bottom: 25px;
+    }
+}
+
+/* ── Ações de Login + Esqueci Minha Senha + Modal de Senha ── */
+.linha-acoes-login {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.botao-acessar {
+    width: auto;
+    min-width: 140px;
+    padding: 0 20px;
+    height: 36px;
+    background-color: var(--azul);
+    font-weight: 600;
+}
+
+.link-esqueci-senha {
+    background: transparent;
+    border: none;
+    color: #475569;
+    font-size: 12.5px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 4px 0;
+}
+
+.link-esqueci-senha:hover {
+    color: var(--azul);
+    text-decoration: underline;
+}
+
+.box-atalhos-django {
+    margin-top: 20px;
+    padding: 12px 14px;
+    background: #f8fafc;
+    border: 1px dashed #cbd5e1;
+    border-radius: 8px;
+    font-size: 12.5px;
+    color: #475569;
+    line-height: 1.6;
+}
+
+.linha-preenchimento-rapido {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.linha-links-django {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.btn-mini-django {
+    background: #eef3fd;
+    color: #1a4fb4;
+    border: 1px solid #bfdbfe;
+    border-radius: 6px;
+    padding: 3px 9px;
+    font-size: 11.5px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.btn-mini-ocultar {
+    background: #f1f5f9;
+    color: #64748b;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 3px 8px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-mini-ocultar:hover {
+    background: #fee2e2;
+    color: #b91c1c;
+    border-color: #fca5a5;
+}
+
+/* Modal Redefinir Senha */
+.modal-senha-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(3px);
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+}
+
+.modal-senha-overlay.visivel {
+    display: flex;
+}
+
+.modal-senha-card {
+    background: #ffffff;
+    width: 100%;
+    max-width: 420px;
+    border-radius: 12px;
+    padding: 26px;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.22);
+}
+
+.modal-senha-card h3 {
+    font-size: 19px;
+    color: #1e293b;
+    margin-bottom: 6px;
+}
+
+.modal-senha-sub {
+    font-size: 12.5px;
+    color: #64748b;
+    margin-bottom: 18px;
+}
+
+.campo-modal-senha {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 14px;
+}
+
+.campo-modal-senha label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #334155;
+    margin-bottom: 5px;
+}
+
+.campo-modal-senha input {
+    height: 38px;
+    padding: 0 11px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.checkbox-ocultar-auto {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 12.5px;
+    color: #475569;
+    margin: 12px 0 16px 0;
+    cursor: pointer;
+}
+
+.erro-modal-senha {
+    display: none;
+    padding: 9px 12px;
+    background: #fee2e2;
+    color: #b91c1c;
+    border-radius: 6px;
+    font-size: 12.5px;
+    font-weight: 600;
+    margin-bottom: 14px;
+}
+
+.acoes-modal-senha {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.btn-cancelar-senha {
+    padding: 8px 14px;
+    border-radius: 7px;
+    border: 1px solid #cbd5e1;
+    background: #f8fafc;
+    color: #475569;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-salvar-senha {
+    padding: 8px 16px;
+    border-radius: 7px;
+    border: none;
+    background: var(--azul);
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+}
+

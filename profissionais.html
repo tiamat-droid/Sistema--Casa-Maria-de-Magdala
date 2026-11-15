@@ -1,0 +1,354 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profissionais — Casa Maria de Magdala</title>
+  <link rel="stylesheet" href="{% static 'css/interface/sistema.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/interface/profissionais.css' %}" />
+</head>
+<body>
+
+  <!-- ===== Cabeçalho ===== -->
+  <header class="cabecalho-sistema">
+    <div class="container-cabecalho">
+      <div class="logo-sistema">
+        <svg width="32" height="32" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <circle cx="24" cy="24" r="24" fill="#1a4fb4"/>
+          <path d="M24 10 L24 38 M10 24 L38 24" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+        </svg>
+        <span>Casa Maria de Magdala</span>
+      </div>
+      <nav class="nav-sistema">
+        <a href="/interface/sistema/" class="btn-nav">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+          Voltar ao Painel
+        </a>
+        <a href="/interface/login/" class="btn-nav btn-nav-sair">Sair</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== Conteúdo principal ===== -->
+  <main class="container principal-prof">
+
+    <div class="painel-topo">
+      <div>
+        <h1>Profissionais <span>12 cadastrados</span></h1>
+        <p class="subtitulo-pag">Voluntários e equipe técnica vinculados às especialidades</p>
+      </div>
+      <button class="botao-primario" onclick="abrirModalCadastroProfissional()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Cadastrar Profissional
+      </button>
+    </div>
+
+    <!-- Busca rápida -->
+    <div class="barra-busca-prof">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="search" id="buscaProf" placeholder="Buscar por nome ou especialidade..." oninput="filtrarProfissionais()" />
+    </div>
+
+    <!-- Tabela -->
+    <div class="tabela-container">
+      <table class="tabela-dados" id="tabelaProfissionais">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Especialidade(s)</th>
+            <th>Contato</th>
+            <th>Situação</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="corpoProfissionais">
+          <tr data-busca="cristina fisioterapia medica">
+            <td><strong>Cristina</strong></td>
+            <td><span class="tag-espec">Fisioterapia médica</span></td>
+            <td>—</td>
+            <td><span class="badge-status badge-ativo">Ativo</span></td>
+            <td class="acoes-tabela">
+              <button class="btn-tabela" onclick="abrirEdicaoProfissional('Cristina')" title="Editar">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                Editar
+              </button>
+              <a href="/interface/agenda/" class="btn-tabela" title="Ver agenda">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                Agenda
+              </a>
+            </td>
+          </tr>
+          <tr data-busca="mara fonoaudiologia">
+            <td><strong>Mara</strong></td>
+            <td><span class="tag-espec">Fonoaudiologia</span></td>
+            <td>—</td>
+            <td><span class="badge-status badge-ativo">Ativo</span></td>
+            <td class="acoes-tabela">
+              <button class="btn-tabela" onclick="abrirEdicaoProfissional('Mara')">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                Editar
+              </button>
+              <a href="/interface/agenda/" class="btn-tabela">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                Agenda
+              </a>
+            </td>
+          </tr>
+          <tr data-busca="valeria psicologia">
+            <td><strong>Valéria</strong></td>
+            <td><span class="tag-espec">Psicologia</span></td>
+            <td>—</td>
+            <td><span class="badge-status badge-ativo">Ativo</span></td>
+            <td class="acoes-tabela">
+              <button class="btn-tabela" onclick="abrirEdicaoProfissional('Valéria')">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                Editar
+              </button>
+              <a href="/interface/agenda/" class="btn-tabela">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                Agenda
+              </a>
+            </td>
+          </tr>
+          <tr data-busca="ana maria psicologia">
+            <td><strong>Ana Maria</strong></td>
+            <td><span class="tag-espec">Psicologia</span></td>
+            <td>—</td>
+            <td><span class="badge-status badge-ativo">Ativo</span></td>
+            <td class="acoes-tabela">
+              <button class="btn-tabela" onclick="abrirEdicaoProfissional('Ana Maria')">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                Editar
+              </button>
+              <a href="/interface/agenda/" class="btn-tabela">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                Agenda
+              </a>
+            </td>
+          </tr>
+          <tr data-busca="joao fisioterapia pediatrica">
+            <td><strong>João</strong></td>
+            <td><span class="tag-espec">Fisioterapia pediátrica</span></td>
+            <td>—</td>
+            <td><span class="badge-status badge-ativo">Ativo</span></td>
+            <td class="acoes-tabela">
+              <button class="btn-tabela" onclick="abrirEdicaoProfissional('João')">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                Editar
+              </button>
+              <a href="/interface/agenda/" class="btn-tabela">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                Agenda
+              </a>
+            </td>
+          </tr>
+          <tr data-busca="dra elvira assistencia juridica">
+            <td><strong>Dra. Elvira</strong></td>
+            <td><span class="tag-espec">Assistência jurídica</span></td>
+            <td>—</td>
+            <td><span class="badge-status badge-ativo">Ativo</span></td>
+            <td class="acoes-tabela">
+              <button class="btn-tabela" onclick="abrirEdicaoProfissional('Dra. Elvira')">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                Editar
+              </button>
+              <a href="/interface/agenda/" class="btn-tabela">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                Agenda
+              </a>
+            </td>
+          </tr>
+          <tr data-busca="telma massagem terapeutica massoterapia">
+            <td><strong>Telma</strong></td>
+            <td><span class="tag-espec">Massagem terapêutica</span></td>
+            <td>—</td>
+            <td><span class="badge-status badge-ativo">Ativo</span></td>
+            <td class="acoes-tabela">
+              <button class="btn-tabela" onclick="abrirEdicaoProfissional('Telma')">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                Editar
+              </button>
+              <a href="/interface/agenda/" class="btn-tabela">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                Agenda
+              </a>
+            </td>
+          </tr>
+          <tr data-busca="maria helena pintura tecido artesanato">
+            <td><strong>Maria Helena</strong></td>
+            <td><span class="tag-espec">Pintura em tecido</span></td>
+            <td>—</td>
+            <td><span class="badge-status badge-ativo">Ativo</span></td>
+            <td class="acoes-tabela">
+              <button class="btn-tabela" onclick="abrirEdicaoProfissional('Maria Helena')">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                Editar
+              </button>
+              <a href="/interface/agenda/" class="btn-tabela">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                Agenda
+              </a>
+            </td>
+          </tr>
+          <tr data-busca="wanda croche artesanato">
+            <td><strong>Wanda</strong></td>
+            <td><span class="tag-espec">Crochê</span></td>
+            <td>—</td>
+            <td><span class="badge-status badge-ativo">Ativo</span></td>
+            <td class="acoes-tabela">
+              <button class="btn-tabela" onclick="abrirEdicaoProfissional('Wanda')">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                Editar
+              </button>
+              <a href="/interface/agenda/" class="btn-tabela">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                Agenda
+              </a>
+            </td>
+          </tr>
+          <tr data-busca="bruna nutricao">
+            <td><strong>Bruna</strong></td>
+            <td><span class="tag-espec">Nutrição</span></td>
+            <td>—</td>
+            <td><span class="badge-status badge-ativo">Ativo</span></td>
+            <td class="acoes-tabela">
+              <button class="btn-tabela" onclick="abrirEdicaoProfissional('Bruna')">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                Editar
+              </button>
+              <a href="/interface/agenda/" class="btn-tabela">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                Agenda
+              </a>
+            </td>
+          </tr>
+          <tr data-busca="alessandra acupuntura">
+            <td><strong>Alessandra</strong></td>
+            <td><span class="tag-espec">Acupuntura</span></td>
+            <td>—</td>
+            <td><span class="badge-status badge-ativo">Ativo</span></td>
+            <td class="acoes-tabela">
+              <button class="btn-tabela" onclick="abrirEdicaoProfissional('Alessandra')">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                Editar
+              </button>
+              <a href="/interface/agenda/" class="btn-tabela">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                Agenda
+              </a>
+            </td>
+          </tr>
+          <tr data-busca="andrea costura criativa artesanato">
+            <td><strong>Andréa</strong></td>
+            <td><span class="tag-espec">Costura criativa</span></td>
+            <td>—</td>
+            <td><span class="badge-status badge-ativo">Ativo</span></td>
+            <td class="acoes-tabela">
+              <button class="btn-tabela" onclick="abrirEdicaoProfissional('Andréa')">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                Editar
+              </button>
+              <a href="/interface/agenda/" class="btn-tabela">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                Agenda
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div><!-- /tabela-container -->
+
+  </main><!-- /main -->
+
+  <!-- ===== Rodapé ===== -->
+  <footer class="rodape-sistema">
+    <div class="container-rodape">
+      <span>Sistema de Gestão — Casa Maria de Magdala</span>
+      <div class="links-rodape">
+        <a href="/interface/especialidades/">Especialidades</a>
+        <a href="/interface/atendimentos/">Atendimentos</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== Modal: Cadastrar Profissional ===== -->
+  <div class="modal-aviso" id="modalCadastroProfissional">
+    <div class="modal-conteudo modal-grande">
+      <h2>Cadastrar Profissional</h2>
+
+      <div class="campo-form">
+        <label for="nomeProfissional">Nome completo *</label>
+        <input type="text" id="nomeProfissional" placeholder="Ex.: Dra. Ana Lima" />
+      </div>
+
+      <div class="campo-form">
+        <label for="especialidadeProfissional">Especialidade(s) *</label>
+        <select id="especialidadeProfissional" multiple size="6">
+          <optgroup label="Terapêutica">
+            <option value="fisioterapia-medica">Fisioterapia médica</option>
+            <option value="fisioterapia-pediatrica">Fisioterapia pediátrica</option>
+            <option value="fonoaudiologia">Fonoaudiologia</option>
+            <option value="acupuntura">Acupuntura</option>
+            <option value="massagem-terapeutica">Massagem terapêutica</option>
+            <option value="reflexologia">Reflexologia</option>
+            <option value="reiki">Reiki</option>
+            <option value="nutricao">Nutrição</option>
+            <option value="psicologia">Psicologia</option>
+            <option value="assistencia-juridica">Assistência jurídica</option>
+            <option value="servico-social">Serviço social</option>
+          </optgroup>
+          <optgroup label="Artesanato">
+            <option value="pintura-tecido">Pintura em tecido</option>
+            <option value="croche">Crochê</option>
+            <option value="bijuteria">Bijuteria</option>
+            <option value="costura-criativa">Costura criativa</option>
+          </optgroup>
+          <optgroup label="Capacitação">
+            <option value="refrigeracao">Refrigeração</option>
+            <option value="manutencao-lavadora">Manutenção de máquina de lavar</option>
+            <option value="manutencao-micro-ondas">Manutenção de micro-ondas</option>
+          </optgroup>
+          <optgroup label="Educação e Cultura">
+            <option value="reforco-escolar">Reforço escolar</option>
+            <option value="teatro">Teatro</option>
+          </optgroup>
+        </select>
+        <small>Segure Ctrl (ou Cmd) para selecionar mais de uma</small>
+      </div>
+
+      <div class="linha-dupla">
+        <div class="campo-form">
+          <label for="telefoneProfissional">Telefone</label>
+          <input type="tel" id="telefoneProfissional" placeholder="(21) 90000-0000" />
+        </div>
+        <div class="campo-form">
+          <label for="emailProfissional">E-mail</label>
+          <input type="email" id="emailProfissional" placeholder="nome@email.com" />
+        </div>
+      </div>
+
+      <div class="campo-form">
+        <label for="registroProfissional">Registro profissional (CRP, CREFITO, CRN…)</label>
+        <input type="text" id="registroProfissional" placeholder="Ex.: CRP 05/00000" />
+      </div>
+
+      <div class="campo-form">
+        <label for="obsProfissional">Observações</label>
+        <textarea id="obsProfissional" placeholder="Horários, disponibilidade, informações extras…"></textarea>
+      </div>
+
+      <div class="modal-botoes">
+        <button class="btn-modal-sec" onclick="fecharModalCadastroProfissional()">Cancelar</button>
+        <button class="btn-modal-prim" onclick="salvarProfissional()">Salvar Profissional</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast-sucesso" id="toastProfissional"></div>
+
+  <script src="{% static 'js/interface/profissionais.js' %}"></script>
+  <script src="{% static 'js/interface/excluir.js' %}"></script>
+</body>
+</html>

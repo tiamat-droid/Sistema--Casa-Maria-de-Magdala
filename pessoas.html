@@ -1,0 +1,229 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de Pessoas | Casa Maria de Magdala</title>
+
+    <!-- Folhas de Estilo Separadas -->
+    <link rel="stylesheet" href="{% static 'css/interface/sistema.css' %}">
+    <link rel="stylesheet" href="{% static 'css/interface/pessoas.css' %}">
+</head>
+
+<body>
+
+    <header class="barra-institucional">
+        <div class="container barra-conteudo">
+            <span>Maria de Magdala — Área Restrita</span>
+            <span class="ambiente">Ambiente de Gestão Interna</span>
+        </div>
+    </header>
+
+    <nav class="navegacao">
+        <div class="container nav-conteudo">
+
+            <div class="logo">
+                <div class="logo-caixa">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                </div>
+                <span>Magdala <span class="logo-secundario">/ PESSOAS</span></span>
+            </div>
+
+            <div class="usuario">
+                <a href="/interface/sistema/" class="btn-acao" style="display: inline-flex; align-items: center; gap: 6px;">
+                    ← Voltar ao Painel
+                </a>
+                <a href="/interface/login/" class="botao-sair">Sair</a>
+            </div>
+
+        </div>
+    </nav>
+
+    <main class="container" style="padding-top: 40px; padding-bottom: 60px;">
+
+        <div class="painel-topo">
+            <div>
+                <p class="tag-secao">GESTÃO DE ACOLHIDOS & ASSISTIDOS</p>
+                <h1>Pessoas Cadastradas</h1>
+                <p class="subtitulo">Consulte fichas cadastrais, situação de vínculo e histórico de atendimentos.</p>
+            </div>
+
+            <a href="/interface/cadastro/" class="botao-cadastrar">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                Cadastrar Nova Pessoa
+            </a>
+        </div>
+
+        <!-- Barra de Ferramentas com Busca Rápida e Filtros -->
+        <div class="barra-ferramentas">
+            <div class="campo-busca" style="max-width: 420px; margin: 0;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" id="buscaPessoas" placeholder="Pesquisar por nome ou CPF..." autocomplete="off">
+            </div>
+
+            <div class="filtros-status">
+                <span style="font-size: 13px; color: var(--texto-secundario); font-weight: 600;">Filtrar:</span>
+                <button type="button" class="btn-filtro ativo" onclick="filtrarStatus('todos', this)">Todos</button>
+                <button type="button" class="btn-filtro" onclick="filtrarStatus('ativa', this)">Ativas</button>
+                <button type="button" class="btn-filtro" onclick="filtrarStatus('inativa', this)">Inativas</button>
+            </div>
+        </div>
+
+        <!-- Tabela Dinâmica -->
+        <div class="tabela-card">
+            <div class="tabela-wrap">
+                <table id="tabelaPessoas">
+                    <thead>
+                        <tr>
+                            <th>Nome do Acolhido / Assistido</th>
+                            <th>CPF</th>
+                            <th>Telefone</th>
+                            <th>Atendimentos Ativos</th>
+                            <th>Situação</th>
+                            <th style="text-align: right;">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Linha 1 -->
+                        <tr data-status="ativa" data-cpf="123.456.789-00">
+                            <td>
+                                <strong>Maria da Conceição Silva</strong><br>
+                                <span style="font-size: 12px; color: var(--texto-secundario);">Desde 10/02/2024</span>
+                            </td>
+                            <td>123.456.789-00</td>
+                            <td>(21) 98765-4321</td>
+                            <td><span class="badge-atendimentos">2 ativos</span> (Fisio, Psico)</td>
+                            <td><span class="badge-status status-ativo">● Ativa</span></td>
+                            <td style="text-align: right;">
+                                <div class="acoes-tabela" style="justify-content: flex-end;">
+                                    <button class="btn-acao destaque" onclick="abrirFicha('Maria da Conceição Silva', '123.456.789-00', '(21) 98765-4321', 'Fisioterapia, Psicologia', '10/02/2024')">Ver Ficha</button>
+                                    <a href="/interface/cadastro/" class="btn-acao">Editar</a>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- Linha 2 -->
+                        <tr data-status="ativa" data-cpf="234.567.890-11">
+                            <td>
+                                <strong>João Carlos Pereira</strong><br>
+                                <span style="font-size: 12px; color: var(--texto-secundario);">Desde 15/05/2024</span>
+                            </td>
+                            <td>234.567.890-11</td>
+                            <td>(21) 97654-3210</td>
+                            <td><span class="badge-atendimentos">1 ativo</span> (Nutrição)</td>
+                            <td><span class="badge-status status-ativo">● Ativa</span></td>
+                            <td style="text-align: right;">
+                                <div class="acoes-tabela" style="justify-content: flex-end;">
+                                    <button class="btn-acao destaque" onclick="abrirFicha('João Carlos Pereira', '234.567.890-11', '(21) 97654-3210', 'Nutrição', '15/05/2024')">Ver Ficha</button>
+                                    <a href="/interface/cadastro/" class="btn-acao">Editar</a>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- Linha 3 -->
+                        <tr data-status="inativa" data-cpf="345.678.901-22">
+                            <td>
+                                <strong>Ana Paula dos Santos</strong><br>
+                                <span style="font-size: 12px; color: var(--texto-secundario);">Desde 04/01/2023 (Alta Concluída)</span>
+                            </td>
+                            <td>345.678.901-22</td>
+                            <td>(21) 96543-2109</td>
+                            <td><span class="badge-atendimentos" style="background:#f1f5f9; color:#64748b;">0 ativos</span></td>
+                            <td><span class="badge-status status-inativo">○ Inativa</span></td>
+                            <td style="text-align: right;">
+                                <div class="acoes-tabela" style="justify-content: flex-end;">
+                                    <button class="btn-acao destaque" onclick="abrirFicha('Ana Paula dos Santos', '345.678.901-22', '(21) 96543-2109', 'Nenhum (Alta em 2024)', '04/01/2023')">Ver Ficha</button>
+                                    <a href="/interface/cadastro/" class="btn-acao">Editar</a>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- Linha 4 -->
+                        <tr data-status="ativa" data-cpf="456.789.012-33">
+                            <td>
+                                <strong>Carlos Eduardo Ribeiro</strong><br>
+                                <span style="font-size: 12px; color: var(--texto-secundario);">Desde 20/08/2024</span>
+                            </td>
+                            <td>456.789.012-33</td>
+                            <td>(21) 95432-1098</td>
+                            <td><span class="badge-atendimentos">3 ativos</span> (Fisio, Acupuntura, Costura)</td>
+                            <td><span class="badge-status status-ativo">● Ativa</span></td>
+                            <td style="text-align: right;">
+                                <div class="acoes-tabela" style="justify-content: flex-end;">
+                                    <button class="btn-acao destaque" onclick="abrirFicha('Carlos Eduardo Ribeiro', '456.789.012-33', '(21) 95432-1098', 'Fisioterapia, Acupuntura, Costura', '20/08/2024')">Ver Ficha</button>
+                                    <a href="/interface/cadastro/" class="btn-acao">Editar</a>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- Linha 5 -->
+                        <tr data-status="ativa" data-cpf="567.890.123-44">
+                            <td>
+                                <strong>Francisca Helena Lima</strong><br>
+                                <span style="font-size: 12px; color: var(--texto-secundario);">Desde 12/09/2024</span>
+                            </td>
+                            <td>567.890.123-44</td>
+                            <td>(21) 94321-0987</td>
+                            <td><span class="badge-atendimentos">1 ativo</span> (Serviço Social)</td>
+                            <td><span class="badge-status status-ativo">● Ativa</span></td>
+                            <td style="text-align: right;">
+                                <div class="acoes-tabela" style="justify-content: flex-end;">
+                                    <button class="btn-acao destaque" onclick="abrirFicha('Francisca Helena Lima', '567.890.123-44', '(21) 94321-0987', 'Serviço Social', '12/09/2024')">Ver Ficha</button>
+                                    <a href="/interface/cadastro/" class="btn-acao">Editar</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="rodape-tabela">
+                <span id="contadorLinhas">Exibindo 5 pessoas cadastradas</span>
+                <span style="font-size: 12px; color: var(--azul-600); font-weight: 700;">Base protegida conforme a LGPD</span>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Modal com a Ficha Detalhada da Pessoa -->
+    <div id="modalFicha" class="modal-aviso">
+        <div class="modal-conteudo" style="max-width: 500px; text-align: left;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
+                <div>
+                    <span class="tag-secao">PRONTUÁRIO SOCIAL</span>
+                    <h3 id="fichaNome" style="color: var(--azul-900); font-size: 20px; font-weight: 800;">Nome</h3>
+                </div>
+                <span class="badge-status status-ativo" id="fichaBadge">● Ativa</span>
+            </div>
+
+            <div style="background: #f8fafc; padding: 14px; border-radius: 10px; border: 1px solid var(--borda); margin-bottom: 16px; font-size: 13.5px; line-height: 1.8;">
+                <p><strong>CPF:</strong> <span id="fichaCpf">000.000.000-00</span></p>
+                <p><strong>Telefone:</strong> <span id="fichaTelefone">(00) 00000-0000</span></p>
+                <p><strong>Data de Entrada:</strong> <span id="fichaData">00/00/0000</span></p>
+                <p><strong>Atendimentos Ativos:</strong> <span id="fichaAtendimentos" style="color: var(--azul-700); font-weight: 700;">-</span></p>
+            </div>
+
+            <div style="display: flex; justify-content: flex-end; gap: 10px;">
+                <button type="button" class="btn-acao" onclick="fecharFicha()">Fechar</button>
+                <a href="/interface/cadastro/" class="btn-acao destaque">Editar Cadastro</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script JavaScript Separado e Modular -->
+    <script src="{% static 'js/interface/pessoas.js' %}"></script>
+
+  <script src="{% static 'js/interface/excluir.js' %}"></script>
+</body>
+</html>

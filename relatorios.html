@@ -1,0 +1,161 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Relatórios e Consultas — Casa Maria de Magdala</title>
+  <link rel="stylesheet" href="{% static 'css/interface/sistema.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/interface/relatorios.css' %}" />
+</head>
+<body>
+
+  <nav class="nav-topo">
+    <a href="/interface/sistema/" class="nav-voltar">← Voltar ao Painel</a>
+    <span class="nav-titulo">Casa Maria de Magdala</span>
+    <a href="/interface/login/" class="nav-sair">Sair</a>
+  </nav>
+
+  <main class="container-principal">
+    <div class="cabecalho-pagina">
+      <h1>Relatórios e Consultas</h1>
+      <p class="subtitulo">Indicadores e exportação de dados</p>
+    </div>
+
+    <!-- Grade de cards -->
+    <div class="grade-relatorios">
+
+      <div class="card-relatorio" id="card-pessoas" onclick="window.abrirFiltros('Pessoas por Especialidade')">
+        <div class="icone-rel">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="12" width="4" height="8" rx="1"/>
+            <rect x="10" y="8" width="4" height="12" rx="1"/>
+            <rect x="17" y="4" width="4" height="16" rx="1"/>
+          </svg>
+        </div>
+        <h3>Pessoas por Especialidade</h3>
+        <p class="card-descricao">Veja quantas pessoas estão em cada especialidade ativa</p>
+        <button class="botao-primario btn-gerar">Gerar</button>
+      </div>
+
+      <div class="card-relatorio" id="card-atendimentos" onclick="window.abrirFiltros('Atendimentos por Período')">
+        <div class="icone-rel">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="4" width="18" height="18" rx="2"/>
+            <line x1="16" y1="2" x2="16" y2="6"/>
+            <line x1="8" y1="2" x2="8" y2="6"/>
+            <line x1="3" y1="10" x2="21" y2="10"/>
+          </svg>
+        </div>
+        <h3>Atendimentos por Período</h3>
+        <p class="card-descricao">Filtre atendimentos por data de início e alta</p>
+        <button class="botao-primario btn-gerar">Gerar</button>
+      </div>
+
+      <div class="card-relatorio" id="card-profissionais" onclick="window.abrirFiltros('Profissionais e Agenda')">
+        <div class="icone-rel">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="8" r="4"/>
+            <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+          </svg>
+        </div>
+        <h3>Profissionais e Agenda</h3>
+        <p class="card-descricao">Lista de profissionais com especialidades e horários</p>
+        <button class="botao-primario btn-gerar">Gerar</button>
+      </div>
+
+      <div class="card-relatorio" id="card-cursos" onclick="window.abrirFiltros('Cursos e Capacitações')">
+        <div class="icone-rel">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+          </svg>
+        </div>
+        <h3>Cursos e Capacitações</h3>
+        <p class="card-descricao">Situação dos cursos e atividades culturais</p>
+        <button class="botao-primario btn-gerar">Gerar</button>
+      </div>
+
+    </div>
+
+    <!-- Painel de Filtros -->
+    <div class="painel-filtros" id="painelFiltros">
+      <h3 id="tituloPainel">Filtros — Relatório</h3>
+
+      <!-- Filtros para Atendimentos por Período -->
+      <div id="filtrosPeriodo" class="grupo-filtros escondido">
+        <div class="linha-filtros">
+          <div class="campo-form">
+            <label for="dataInicio">Data de Início</label>
+            <input type="date" id="dataInicio" name="dataInicio" />
+          </div>
+          <div class="campo-form">
+            <label for="dataFim">Data de Fim</label>
+            <input type="date" id="dataFim" name="dataFim" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Filtros para outros relatórios -->
+      <div id="filtrosEspecialidade" class="grupo-filtros escondido">
+        <div class="campo-form">
+          <label for="selectEspecialidade">Especialidade</label>
+          <select id="selectEspecialidade" name="especialidade">
+            <option value="">— Todas —</option>
+            <option value="acupuntura">Acupuntura</option>
+            <option value="assistencia-juridica">Assistência Jurídica</option>
+            <option value="costura-criativa">Costura Criativa</option>
+            <option value="crochet">Crochê</option>
+            <option value="fisioterapia-medica">Fisioterapia Médica</option>
+            <option value="fisioterapia-pediatrica">Fisioterapia Pediátrica</option>
+            <option value="fonoaudiologia">Fonoaudiologia</option>
+            <option value="massagem-terapeutica">Massagem Terapêutica</option>
+            <option value="musicoterapia">Musicoterapia</option>
+            <option value="nutricao">Nutrição</option>
+            <option value="odontologia">Odontologia</option>
+            <option value="pedagogia">Pedagogia</option>
+            <option value="pintura-tecido">Pintura em Tecido</option>
+            <option value="psicologia">Psicologia</option>
+            <option value="psicopedagogia">Psicopedagogia</option>
+            <option value="reflexologia">Reflexologia / Reiki</option>
+            <option value="servico-social">Serviço Social</option>
+            <option value="tai-chi">Tai Chi / Meditação</option>
+            <option value="terapia-ocupacional">Terapia Ocupacional</option>
+            <option value="yoga">Yoga</option>
+            <option value="zumba">Zumba</option>
+            <option value="outras">Outras Atividades</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="acoes-painel">
+        <button class="botao-primario" onclick="window.exportarCSV()">Exportar CSV</button>
+        <button class="btn-modal-sec" onclick="window.fecharFiltros()">Fechar</button>
+      </div>
+    </div>
+
+    <!-- Tabela de Prévia -->
+    <div class="area-previa">
+      <table class="tabela-dados" id="tabelaPrevia">
+        <caption>Os dados aparecerão aqui quando integrado ao banco de dados Django.</caption>
+        <thead id="theadPrevia">
+          <tr id="trPrevia"></tr>
+        </thead>
+        <tbody id="tbodyPrevia"></tbody>
+      </table>
+    </div>
+
+  </main>
+
+  <!-- Toast -->
+  <div class="toast-sucesso" id="toastSucesso"></div>
+
+  <!-- Rodapé -->
+  <footer class="rodape-links">
+    <a href="/interface/pessoas/">Pessoas</a>
+    <a href="/interface/atendimentos/">Atendimentos</a>
+  </footer>
+
+  <script src="{% static 'js/interface/relatorios.js' %}"></script>
+</body>
+</html>

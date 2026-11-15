@@ -1,0 +1,146 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Usuários do Sistema — Casa Maria de Magdala</title>
+  <link rel="stylesheet" href="{% static 'css/interface/sistema.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/interface/usuarios.css' %}" />
+</head>
+<body>
+
+  <nav class="nav-topo">
+    <a href="/interface/sistema/" class="nav-voltar">← Voltar ao Painel</a>
+    <span class="nav-titulo">Casa Maria de Magdala</span>
+    <a href="/interface/login/" class="nav-sair">Sair</a>
+  </nav>
+
+  <main class="container-principal">
+    <div class="cabecalho-pagina">
+      <h1>Usuários do Sistema</h1>
+      <p class="subtitulo">Acesso e permissões</p>
+    </div>
+
+    <!-- Barra de ações -->
+    <div class="barra-acoes">
+      <input
+        type="search"
+        id="buscaUsuario"
+        placeholder="Buscar por nome ou e-mail…"
+        oninput="window.filtrarUsuarios()"
+        class="input-busca"
+      />
+      <button class="botao-primario" onclick="window.abrirModalNovoUsuario()">+ Novo Usuário</button>
+    </div>
+
+    <!-- Tabela de usuários -->
+    <div class="tabela-wrapper">
+      <table class="tabela-dados" id="tabelaUsuarios">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>E-mail</th>
+            <th>Perfil</th>
+            <th>Situação</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="tbodyUsuarios">
+          <tr data-nome="Giowanna Azevedo" data-email="giowanna@magdala.org">
+            <td>Giowanna Azevedo</td>
+            <td>giowanna@magdala.org</td>
+            <td><span class="badge-perfil badge-administrador">Administrador</span></td>
+            <td><span class="badge-ativo">Ativo</span></td>
+            <td class="td-acoes">
+              <button class="btn-acao" onclick="window.editarUsuario('Giowanna Azevedo')">Editar</button>
+            </td>
+          </tr>
+          <tr data-nome="Luiz Guilherme" data-email="luiz@magdala.org">
+            <td>Luiz Guilherme</td>
+            <td>luiz@magdala.org</td>
+            <td><span class="badge-perfil badge-coordenador">Coordenador</span></td>
+            <td><span class="badge-ativo">Ativo</span></td>
+            <td class="td-acoes">
+              <button class="btn-acao" onclick="window.editarUsuario('Luiz Guilherme')">Editar</button>
+            </td>
+          </tr>
+          <tr data-nome="Diva" data-email="diva@magdala.org">
+            <td>Diva</td>
+            <td>diva@magdala.org</td>
+            <td><span class="badge-perfil badge-visualizador">Visualizador</span></td>
+            <td><span class="badge-ativo">Ativo</span></td>
+            <td class="td-acoes">
+              <button class="btn-acao" onclick="window.editarUsuario('Diva')">Editar</button>
+            </td>
+          </tr>
+          <tr data-nome="Usuário Teste" data-email="teste@magdala.org">
+            <td>Usuário Teste</td>
+            <td>teste@magdala.org</td>
+            <td><span class="badge-perfil badge-recepcionista">Recepcionista</span></td>
+            <td><span class="badge-inativo">Inativo</span></td>
+            <td class="td-acoes">
+              <button class="btn-acao" onclick="window.editarUsuario('Usuário Teste')">Editar</button>
+              <button class="btn-acao btn-reativar" onclick="window.reativarUsuario('Usuário Teste')">Reativar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <!-- Toast -->
+  <div class="toast-sucesso" id="toastSucesso"></div>
+
+  <!-- Modal Novo Usuário -->
+  <div class="modal-aviso" id="modalNovoUsuario">
+    <div class="modal-conteudo">
+      <h2>Novo Usuário</h2>
+
+      <div class="campo-form">
+        <label for="novoNome">Nome <span class="obrigatorio">*</span></label>
+        <input type="text" id="novoNome" placeholder="Nome completo" />
+      </div>
+
+      <div class="campo-form">
+        <label for="novoEmail">E-mail <span class="obrigatorio">*</span></label>
+        <input type="email" id="novoEmail" placeholder="email@magdala.org" />
+      </div>
+
+      <div class="campo-form">
+        <label for="novoPerfil">Perfil</label>
+        <select id="novoPerfil">
+          <option value="Administrador">Administrador</option>
+          <option value="Coordenador">Coordenador</option>
+          <option value="Recepcionista">Recepcionista</option>
+          <option value="Visualizador">Visualizador</option>
+        </select>
+      </div>
+
+      <div class="campo-form">
+        <label for="novaSenha">Senha <span class="obrigatorio">*</span></label>
+        <input type="password" id="novaSenha" placeholder="••••••••" />
+      </div>
+
+      <div class="campo-form">
+        <label for="confirmarSenha">Confirmar Senha <span class="obrigatorio">*</span></label>
+        <input type="password" id="confirmarSenha" placeholder="••••••••" />
+      </div>
+
+      <div class="modal-botoes">
+        <button class="botao-primario" onclick="window.salvarUsuario()">Salvar</button>
+        <button class="btn-modal-sec" onclick="window.fecharModalNovoUsuario()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Rodapé -->
+  <footer class="rodape-links">
+    <a href="/interface/sistema/">Painel</a>
+    <a href="/interface/configuracoes/">Configurações</a>
+  </footer>
+
+  <script src="{% static 'js/interface/usuarios.js' %}"></script>
+  <script src="{% static 'js/interface/excluir.js' %}"></script>
+</body>
+</html>

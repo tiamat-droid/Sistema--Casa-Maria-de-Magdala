@@ -1,0 +1,75 @@
+/* especialidades.css — tela de Especialidades (Django) */
+
+.principal-espec { padding: 32px 0 64px; }
+
+.painel-topo {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  flex-wrap: wrap; gap: 16px; margin-bottom: 24px;
+}
+.painel-topo h1 { font-size: 1.6rem; color: #0b2559; margin: 6px 0 4px; }
+.subtitulo-esp { color: #64748b; font-size: 0.9rem; margin: 0; }
+.link-voltar-esp { color: #1a4fb4; font-size: 0.85rem; text-decoration: none; font-weight: 600; }
+
+.botao-primario {
+  background: linear-gradient(135deg, #1a4fb4, #2563d6); color: #fff; border: none;
+  border-radius: 10px; padding: 10px 20px; font-weight: 600; cursor: pointer;
+}
+
+.mensagens { margin-bottom: 16px; }
+.mensagem { padding: 10px 14px; border-radius: 8px; font-size: 0.9rem; margin-bottom: 8px; }
+.mensagem-success { background: #dcfce7; color: #15803d; }
+.mensagem-error { background: #fee2e2; color: #dc2626; }
+
+.filtros-categoria { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 28px; }
+.btn-categoria {
+  background: #f1f5f9; border: none; border-radius: 999px; padding: 8px 18px;
+  font-weight: 600; font-size: 0.88rem; color: #64748b; cursor: pointer;
+}
+.btn-categoria.ativo { background: #1a4fb4; color: #fff; }
+
+.secao-categoria { margin-bottom: 40px; }
+.secao-categoria h2 { font-size: 1.1rem; color: #0b2559; margin-bottom: 14px; }
+
+.grade-especialidades { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+@media (max-width: 900px) { .grade-especialidades { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .grade-especialidades { grid-template-columns: 1fr; } }
+
+.card-especialidade {
+  background: #fff; border: 1.5px solid #e2e8f0; border-radius: 12px; padding: 18px;
+}
+.esp-topo { display: flex; justify-content: space-between; gap: 8px; margin-bottom: 14px; }
+.esp-nome { font-weight: 700; color: #0b2559; }
+.esp-badge { border-radius: 999px; padding: 3px 10px; font-size: 0.75rem; font-weight: 700; height: fit-content; }
+.badge-ativo { background: #dcfce7; color: #15803d; }
+.badge-inativo { background: #f1f5f9; color: #64748b; }
+.esp-rodape { display: flex; justify-content: space-between; align-items: center; }
+.esp-atendimentos { font-size: 0.78rem; color: #64748b; }
+.esp-acoes { display: flex; gap: 6px; }
+.btn-acao-esp {
+  background: transparent; border: 1.5px solid #e2e8f0; border-radius: 8px;
+  padding: 5px 8px; cursor: pointer;
+}
+.btn-acao-esp:hover { background: #eef3fd; }
+.sem-itens { color: #64748b; font-size: 0.9rem; }
+
+/* modais */
+.modal-esp {
+  position: fixed; inset: 0; background: rgba(11, 37, 89, 0.45);
+  display: flex; align-items: center; justify-content: center; z-index: 1000;
+  opacity: 0; pointer-events: none; transition: opacity 0.2s; padding: 16px;
+}
+.modal-esp.visivel { opacity: 1; pointer-events: auto; }
+.modal-esp-conteudo {
+  background: #fff; border-radius: 14px; padding: 28px; width: 100%; max-width: 440px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.modal-esp-conteudo h3 { color: #0b2559; margin: 0 0 8px; }
+.modal-esp-conteudo label { font-size: 0.85rem; font-weight: 600; color: #0b2559; }
+.modal-esp-conteudo input[type=text], .modal-esp-conteudo select {
+  border: 1.5px solid #cbd5e1; border-radius: 8px; padding: 9px 12px; font-size: 0.93rem;
+}
+.modal-esp-conteudo .check { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
+.modal-botoes { display: flex; justify-content: flex-end; gap: 10px; margin-top: 16px; }
+.btn-sec { background: #f1f5f9; border: none; border-radius: 8px; padding: 10px 18px; font-weight: 600; cursor: pointer; }
+.btn-prim { background: #1a4fb4; color: #fff; border: none; border-radius: 8px; padding: 10px 20px; font-weight: 600; cursor: pointer; }
+.btn-perigo { background: #dc2626; color: #fff; border: none; border-radius: 8px; padding: 10px 20px; font-weight: 600; cursor: pointer; }

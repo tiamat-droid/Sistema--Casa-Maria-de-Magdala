@@ -1,0 +1,291 @@
+/* cursos.css – Módulo Cursos e Capacitações */
+/* Depende de sistema.css para variáveis e base */
+
+/* ── Filtros de status ─────────────────────────── */
+.filtros-cursos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.btn-filtro-curso {
+  padding: 6px 18px;
+  border-radius: 999px;
+  border: 1.5px solid #e2e8f0;
+  background: #fff;
+  color: var(--texto-secundario);
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s, border-color 0.18s;
+}
+
+.btn-filtro-curso:hover {
+  background: var(--azul-claro);
+  border-color: var(--azul-500);
+  color: var(--azul-700);
+}
+
+.btn-filtro-curso.ativo {
+  background: var(--azul-700);
+  color: #fff;
+  border-color: var(--azul-700);
+}
+
+/* ── Grade de Cursos ───────────────────────────── */
+.grade-cursos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+@media (max-width: 1024px) {
+  .grade-cursos {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .grade-cursos {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Card de Curso ─────────────────────────────── */
+.card-curso {
+  background: #fff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: transform 0.18s, box-shadow 0.18s;
+}
+
+.card-curso:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 24px rgba(11, 37, 89, 0.10);
+}
+
+.card-curso-topo {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.card-curso-nome {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--azul-900);
+  flex: 1;
+}
+
+.card-curso-horario {
+  font-size: 0.85rem;
+  color: var(--texto-secundario);
+  margin: 0;
+}
+
+.card-curso-profissional {
+  font-size: 0.85rem;
+  color: var(--azul-700);
+  font-weight: 500;
+  margin: 0;
+}
+
+.card-curso-rodape {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 4px;
+}
+
+/* ── Badges de Categoria ───────────────────────── */
+.badge-categoria {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.badge-artesanato {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.badge-capacitacao {
+  background: #fef9c3;
+  color: #92400e;
+}
+
+.badge-educacao {
+  background: #ede9fe;
+  color: #6d28d9;
+}
+
+.badge-cultura {
+  background: #fce7f3;
+  color: #9d174d;
+}
+
+/* ── Badges de Status ──────────────────────────── */
+.badge-status-curso {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.badge-ativo {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.badge-aguardando {
+  background: #fef9c3;
+  color: #92400e;
+}
+
+.badge-encerrado {
+  background: #f1f5f9;
+  color: #64748b;
+}
+
+/* ── Botão Editar ──────────────────────────────── */
+.botao-editar {
+  padding: 5px 14px;
+  border-radius: 8px;
+  border: 1.5px solid #e2e8f0;
+  background: #fff;
+  color: var(--azul-700);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.botao-editar:hover {
+  background: var(--azul-claro);
+  border-color: var(--azul-500);
+}
+
+/* ── Toast ─────────────────────────────────────── */
+.toast {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  background: var(--azul-700);
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+  z-index: 9999;
+  animation: fadeInUp 0.3s ease;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Modal (complementa sistema.css) ──────────── */
+.modal-aviso {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(11, 37, 89, 0.45);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-aviso.visivel {
+  display: flex;
+}
+
+.modal-conteudo {
+  background: #fff;
+  border-radius: 14px;
+  width: 100%;
+  max-width: 500px;
+  margin: 20px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+  overflow: hidden;
+}
+
+.modal-cabecalho {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 24px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.modal-cabecalho h2 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--azul-900);
+  margin: 0;
+}
+
+.modal-fechar {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--texto-secundario);
+  line-height: 1;
+  padding: 0 4px;
+}
+
+.modal-corpo {
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.campo-form {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.campo-form label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--azul-900);
+}
+
+.campo-form input,
+.campo-form select {
+  padding: 9px 12px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  color: #1e293b;
+  transition: border-color 0.15s;
+}
+
+.campo-form input:focus,
+.campo-form select:focus {
+  outline: none;
+  border-color: var(--azul-500);
+}
+
+.modal-rodape {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 14px 24px;
+  border-top: 1px solid #e2e8f0;
+}

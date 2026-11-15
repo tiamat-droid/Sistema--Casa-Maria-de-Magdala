@@ -1,0 +1,448 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agenda Semanal — Casa Maria de Magdala</title>
+  <link rel="stylesheet" href="{% static 'css/interface/sistema.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/interface/agenda.css' %}" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="navbar">
+    <div class="nav-esquerda">
+      <a href="/interface/sistema/" class="nav-voltar">← Voltar ao Painel</a>
+    </div>
+    <div class="nav-centro">
+      <span class="nav-titulo">Casa Maria de Magdala</span>
+    </div>
+    <div class="nav-direita">
+      <a href="/interface/login/" class="nav-sair">Sair</a>
+    </div>
+  </nav>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="container">
+
+    <!-- CABEÇALHO -->
+    <div class="pagina-cabecalho">
+      <div>
+        <h1 class="pagina-titulo">Agenda Semanal</h1>
+        <p class="pagina-subtitulo">Cronograma de atendimentos e atividades — clique em ✏️ para editar</p>
+      </div>
+      <button class="botao-primario" onclick="window.abrirModalAtividade()">+ Adicionar Atividade</button>
+    </div>
+
+    <!-- GRADE SEMANAL -->
+    <div class="wrapper-grade">
+      <div class="grade-semanal">
+
+        <!-- SEGUNDA-FEIRA -->
+        <div class="coluna-dia">
+          <div class="cabecalho-dia" id="cabecalho-seg">Segunda</div>
+          <div class="corpo-dia" id="corpo-seg">
+
+            <div class="card-atividade">
+              <div class="esp-nome">Fonoaudiologia</div>
+              <div class="prof-nome">Mara</div>
+              <span class="horario">08:00–12:00</span>
+              <div class="card-acoes">
+                <button class="btn-editar-card" onclick="editarAtividade(this)" title="Editar">✏️</button>
+                <button class="btn-excluir-card" onclick="excluirAtividade(this)" title="Remover">🗑️</button>
+              </div>
+            </div>
+
+            <div class="card-atividade">
+              <div class="esp-nome">Pintura em tecido</div>
+              <div class="prof-nome">Mª Helena</div>
+              <span class="horario">09:00–11:00</span>
+              <div class="card-acoes">
+                <button class="btn-editar-card" onclick="editarAtividade(this)" title="Editar">✏️</button>
+                <button class="btn-excluir-card" onclick="excluirAtividade(this)" title="Remover">🗑️</button>
+              </div>
+            </div>
+
+            <div class="card-atividade">
+              <div class="esp-nome">Fisioterapia médica</div>
+              <div class="prof-nome">Cristina</div>
+              <span class="horario">13:00–17:00</span>
+              <div class="card-acoes">
+                <button class="btn-editar-card" onclick="editarAtividade(this)" title="Editar">✏️</button>
+                <button class="btn-excluir-card" onclick="excluirAtividade(this)" title="Remover">🗑️</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- TERÇA-FEIRA -->
+        <div class="coluna-dia">
+          <div class="cabecalho-dia" id="cabecalho-ter">Terça</div>
+          <div class="corpo-dia" id="corpo-ter">
+
+            <div class="card-atividade">
+              <div class="esp-nome">Fisioterapia médica</div>
+              <div class="prof-nome">Cristina</div>
+              <span class="horario">08:00–17:00</span>
+              <div class="card-acoes">
+                <button class="btn-editar-card" onclick="editarAtividade(this)" title="Editar">✏️</button>
+                <button class="btn-excluir-card" onclick="excluirAtividade(this)" title="Remover">🗑️</button>
+              </div>
+            </div>
+
+            <div class="card-atividade">
+              <div class="esp-nome">Fonoaudiologia</div>
+              <div class="prof-nome">Mara</div>
+              <span class="horario">08:00–17:00</span>
+              <div class="card-acoes">
+                <button class="btn-editar-card" onclick="editarAtividade(this)" title="Editar">✏️</button>
+                <button class="btn-excluir-card" onclick="excluirAtividade(this)" title="Remover">🗑️</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- QUARTA-FEIRA -->
+        <div class="coluna-dia">
+          <div class="cabecalho-dia" id="cabecalho-qua">Quarta</div>
+          <div class="corpo-dia" id="corpo-qua">
+
+            <div class="card-atividade card-novo">
+              <div class="esp-nome">Fisioterapia médica <span class="badge-novo">Novo</span></div>
+              <div class="prof-nome">Cristina</div>
+              <span class="horario">08:30–13:30</span>
+              <div class="card-acoes">
+                <button class="btn-editar-card" onclick="editarAtividade(this)" title="Editar">✏️</button>
+                <button class="btn-excluir-card" onclick="excluirAtividade(this)" title="Remover">🗑️</button>
+              </div>
+            </div>
+
+            <div class="card-atividade card-novo">
+              <div class="esp-nome">Fonoaudiologia <span class="badge-novo">Novo</span></div>
+              <div class="prof-nome">Mara</div>
+              <span class="horario">08:00–12:00</span>
+              <div class="card-acoes">
+                <button class="btn-editar-card" onclick="editarAtividade(this)" title="Editar">✏️</button>
+                <button class="btn-excluir-card" onclick="excluirAtividade(this)" title="Remover">🗑️</button>
+              </div>
+            </div>
+
+            <div class="card-atividade card-novo">
+              <div class="esp-nome">Pintura em tecido <span class="badge-novo">Novo</span></div>
+              <div class="prof-nome">Maria Helena</div>
+              <span class="horario">09:00–11:00</span>
+              <div class="card-acoes">
+                <button class="btn-editar-card" onclick="editarAtividade(this)" title="Editar">✏️</button>
+                <button class="btn-excluir-card" onclick="excluirAtividade(this)" title="Remover">🗑️</button>
+              </div>
+            </div>
+
+            <div class="card-atividade card-novo">
+              <div class="esp-nome">Crochê <span class="badge-novo">Novo</span></div>
+              <div class="prof-nome">Wanda</div>
+              <span class="horario">09:00–11:00</span>
+              <div class="card-acoes">
+                <button class="btn-editar-card" onclick="editarAtividade(this)" title="Editar">✏️</button>
+                <button class="btn-excluir-card" onclick="excluirAtividade(this)" title="Remover">🗑️</button>
+              </div>
+            </div>
+
+            <div class="card-atividade">
+              <div class="esp-nome">Psicologia</div>
+              <div class="prof-nome">Valéria</div>
+              <span class="horario">09:00–16:00</span>
+              <div class="card-acoes">
+                <button class="btn-editar-card" onclick="editarAtividade(this)" title="Editar">✏️</button>
+                <button class="btn-excluir-card" onclick="excluirAtividade(this)" title="Remover">🗑️</button>
+              </div>
+            </div>
+
+            <div class="card-atividade">
+              <div class="esp-nome">Psicologia</div>
+              <div class="prof-nome">Ana Maria</div>
+              <span class="horario">13:00–16:00</span>
+              <div class="card-acoes">
+                <button class="btn-editar-card" onclick="editarAtividade(this)" title="Editar">✏️</button>
+                <button class="btn-excluir-card" onclick="excluirAtividade(this)" title="Remover">🗑️</button>
+              </div>
+            </div>
+
+            <div class="card-atividade">
+              <div class="esp-nome">Fisioterapia pediátrica</div>
+              <div class="prof-nome">João</div>
+              <span class="horario">13:00–16:00</span>
+              <div class="card-acoes">
+                <button class="btn-editar-card" onclick="editarAtividade(this)" title="Editar">✏️</button>
+                <button class="btn-excluir-card" onclick="excluirAtividade(this)" title="Remover">🗑️</button>
+              </div>
+            </div>
+
+            <div class="card-atividade">
+              <div class="esp-nome">Assistência jurídica</div>
+              <div class="prof-nome">Dra. Elvira</div>
+              <span class="horario">13:30–16:30</span>
+              <div class="card-acoes">
+                <button class="btn-editar-card" onclick="editarAtividade(this)" title="Editar">✏️</button>
+                <button class="btn-excluir-card" onclick="excluirAtividade(this)" title="Remover">🗑️</button>
+              </div>
+            </div>
+
+            <div class="card-atividade">
+              <div class="esp-nome">Massagem terapêutica</div>
+              <div class="prof-nome">Telma</div>
+              <span class="horario">14:00–17:00</span>
+              <div class="card-acoes">
+                <button class="btn-editar-card" onclick="editarAtividade(this)" title="Editar">✏️</button>
+                <button class="btn-excluir-card" onclick="excluirAtividade(this)" title="Remover">🗑️</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- QUINTA-FEIRA -->
+        <div class="coluna-dia">
+          <div class="cabecalho-dia" id="cabecalho-qui">Quinta</div>
+          <div class="corpo-dia" id="corpo-qui">
+
+            <div class="card-atividade">
+              <div class="esp-nome">Fisioterapia médica</div>
+              <div class="prof-nome">Cristina</div>
+              <span class="horario">08:00–17:00</span>
+              <div class="card-acoes">
+                <button class="btn-editar-card" onclick="editarAtividade(this)" title="Editar">✏️</button>
+                <button class="btn-excluir-card" onclick="excluirAtividade(this)" title="Remover">🗑️</button>
+              </div>
+            </div>
+
+            <div class="card-atividade">
+              <div class="esp-nome">Nutrição</div>
+              <div class="prof-nome">Bruna</div>
+              <span class="horario">09:00–16:00</span>
+              <div class="card-acoes">
+                <button class="btn-editar-card" onclick="editarAtividade(this)" title="Editar">✏️</button>
+                <button class="btn-excluir-card" onclick="excluirAtividade(this)" title="Remover">🗑️</button>
+              </div>
+            </div>
+
+            <div class="card-atividade">
+              <div class="esp-nome">Acupuntura</div>
+              <div class="prof-nome">Alessandra</div>
+              <span class="horario">09:00–12:00</span>
+              <div class="card-acoes">
+                <button class="btn-editar-card" onclick="editarAtividade(this)" title="Editar">✏️</button>
+                <button class="btn-excluir-card" onclick="excluirAtividade(this)" title="Remover">🗑️</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- SEXTA-FEIRA -->
+        <div class="coluna-dia">
+          <div class="cabecalho-dia" id="cabecalho-sex">Sexta</div>
+          <div class="corpo-dia" id="corpo-sex">
+
+            <div class="card-atividade card-novo">
+              <div class="esp-nome">Fisioterapia médica <span class="badge-novo">Novo</span></div>
+              <div class="prof-nome">— A definir</div>
+              <span class="horario">08:30–13:30</span>
+              <div class="card-acoes">
+                <button class="btn-editar-card" onclick="editarAtividade(this)" title="Editar">✏️</button>
+                <button class="btn-excluir-card" onclick="excluirAtividade(this)" title="Remover">🗑️</button>
+              </div>
+            </div>
+
+            <div class="card-atividade">
+              <div class="esp-nome">Reflexologia / Reiki</div>
+              <div class="prof-nome">— A definir</div>
+              <span class="horario">08:30–11:30</span>
+              <div class="card-acoes">
+                <button class="btn-editar-card" onclick="editarAtividade(this)" title="Editar">✏️</button>
+                <button class="btn-excluir-card" onclick="excluirAtividade(this)" title="Remover">🗑️</button>
+              </div>
+            </div>
+
+            <div class="card-atividade">
+              <div class="esp-nome">Psicologia</div>
+              <div class="prof-nome">Valéria</div>
+              <span class="horario">09:00–16:00</span>
+              <div class="card-acoes">
+                <button class="btn-editar-card" onclick="editarAtividade(this)" title="Editar">✏️</button>
+                <button class="btn-excluir-card" onclick="excluirAtividade(this)" title="Remover">🗑️</button>
+              </div>
+            </div>
+
+            <div class="card-atividade">
+              <div class="esp-nome">Costura criativa</div>
+              <div class="prof-nome">Andréa</div>
+              <span class="horario">14:00–17:00</span>
+              <div class="card-acoes">
+                <button class="btn-editar-card" onclick="editarAtividade(this)" title="Editar">✏️</button>
+                <button class="btn-excluir-card" onclick="excluirAtividade(this)" title="Remover">🗑️</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- SÁBADO -->
+        <div class="coluna-dia">
+          <div class="cabecalho-dia" id="cabecalho-sab">Sábado</div>
+          <div class="corpo-dia">
+            <div class="sem-atividades">🗓️<br/>Sem atividades</div>
+          </div>
+        </div>
+
+        <!-- DOMINGO -->
+        <div class="coluna-dia">
+          <div class="cabecalho-dia" id="cabecalho-dom">Domingo</div>
+          <div class="corpo-dia">
+            <div class="sem-atividades">🗓️<br/>Sem atividades</div>
+          </div>
+        </div>
+
+      </div><!-- .grade-semanal -->
+    </div><!-- .wrapper-grade -->
+
+  </main>
+
+  <!-- RODAPÉ -->
+  <footer class="rodape">
+    <a href="/interface/especialidades/">Especialidades</a>
+    <span>·</span>
+    <a href="/interface/profissionais/">Profissionais</a>
+  </footer>
+
+  <!-- MODAL ADICIONAR ATIVIDADE -->
+  <div class="modal-aviso" id="modalAtividade">
+    <div class="modal-conteudo">
+      <div class="modal-cabecalho">
+        <h2 class="modal-titulo">Adicionar Atividade</h2>
+        <button class="modal-fechar" onclick="window.fecharModalAtividade()">✕</button>
+      </div>
+      <div class="modal-corpo">
+        <div class="campo-grupo">
+          <label class="campo-label" for="selDia">Dia da Semana *</label>
+          <select class="campo-input" id="selDia">
+            <option value="">Selecione o dia...</option>
+            <option value="seg">Segunda-feira</option>
+            <option value="ter">Terça-feira</option>
+            <option value="qua">Quarta-feira</option>
+            <option value="qui">Quinta-feira</option>
+            <option value="sex">Sexta-feira</option>
+          </select>
+        </div>
+        <div class="campo-grupo">
+          <label class="campo-label" for="selEspecialidade">Especialidade *</label>
+          <select class="campo-input" id="selEspecialidade">
+            <option value="">Selecione...</option>
+            <option>Fonoaudiologia</option>
+            <option>Fisioterapia médica</option>
+            <option>Fisioterapia pediátrica</option>
+            <option>Psicologia</option>
+            <option>Nutrição</option>
+            <option>Acupuntura</option>
+            <option>Massagem terapêutica</option>
+            <option>Reflexologia / Reiki</option>
+            <option>Assistência jurídica</option>
+            <option>Serviço social</option>
+            <option>Pintura em tecido</option>
+            <option>Crochê</option>
+            <option>Bijuteria</option>
+            <option>Costura criativa</option>
+            <option>Refrigeração</option>
+            <option>Manutenção de máquina de lavar</option>
+            <option>Manutenção de micro-ondas</option>
+            <option>Reforço escolar</option>
+            <option>Teatro</option>
+            <option>Outra</option>
+          </select>
+        </div>
+        <div class="campo-grupo">
+          <label class="campo-label" for="inputProfissional">Profissional</label>
+          <input class="campo-input" type="text" id="inputProfissional" placeholder="Nome do profissional" />
+        </div>
+        <div class="campos-linha">
+          <div class="campo-grupo">
+            <label class="campo-label" for="inputHoraInicio">Horário Início</label>
+            <input class="campo-input" type="time" id="inputHoraInicio" />
+          </div>
+          <div class="campo-grupo">
+            <label class="campo-label" for="inputHoraFim">Horário Fim</label>
+            <input class="campo-input" type="time" id="inputHoraFim" />
+          </div>
+        </div>
+      </div>
+      <div class="modal-rodape">
+        <button class="botao-secundario" onclick="window.fecharModalAtividade()">Cancelar</button>
+        <button class="botao-primario" onclick="window.salvarAtividade()">Salvar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL EDITAR ATIVIDADE -->
+  <div class="modal-aviso" id="modalEditarAtiv">
+    <div class="modal-conteudo">
+      <div class="modal-cabecalho">
+        <h2 class="modal-titulo">Editar Atividade</h2>
+        <button class="modal-fechar" onclick="window.fecharModalEditar()">✕</button>
+      </div>
+      <div class="modal-corpo">
+        <div class="campo-grupo">
+          <label class="campo-label" for="editEsp">Especialidade</label>
+          <select class="campo-input" id="editEsp">
+            <option>Fonoaudiologia</option>
+            <option>Fisioterapia médica</option>
+            <option>Fisioterapia pediátrica</option>
+            <option>Psicologia</option>
+            <option>Nutrição</option>
+            <option>Acupuntura</option>
+            <option>Massagem terapêutica</option>
+            <option>Reflexologia / Reiki</option>
+            <option>Assistência jurídica</option>
+            <option>Serviço social</option>
+            <option>Pintura em tecido</option>
+            <option>Crochê</option>
+            <option>Bijuteria</option>
+            <option>Costura criativa</option>
+            <option>Refrigeração</option>
+            <option>Manutenção de máquina de lavar</option>
+            <option>Manutenção de micro-ondas</option>
+            <option>Reforço escolar</option>
+            <option>Teatro</option>
+            <option>Outra</option>
+          </select>
+        </div>
+        <div class="campo-grupo">
+          <label class="campo-label" for="editProf">Profissional</label>
+          <input class="campo-input" type="text" id="editProf" placeholder="Nome do profissional" />
+        </div>
+        <div class="campos-linha">
+          <div class="campo-grupo">
+            <label class="campo-label" for="editHoraInicio">Horário Início</label>
+            <input class="campo-input" type="time" id="editHoraInicio" />
+          </div>
+          <div class="campo-grupo">
+            <label class="campo-label" for="editHoraFim">Horário Fim</label>
+            <input class="campo-input" type="time" id="editHoraFim" />
+          </div>
+        </div>
+      </div>
+      <div class="modal-rodape">
+        <button class="botao-secundario" onclick="window.fecharModalEditar()">Cancelar</button>
+        <button class="botao-primario" onclick="window.salvarEdicaoAtividade()">Salvar Alterações</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast" role="alert"></div>
+
+  <script src="{% static 'js/interface/agenda.js' %}"></script>
+  <script src="{% static 'js/interface/excluir.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Acesso a Sistemas</title>
+
+    <link rel="stylesheet" href="{% static 'css/sistema.css' %}">
+</head>
+
+<body>
+
+    <header class="barra-institucional">
+        <div class="container barra-conteudo">
+            <span>Maria de Magdala — Área Restrita</span>
+            <span class="ambiente">Ambiente de Produção</span>
+        </div>
+    </header>
+
+    <nav class="navegacao">
+        <div class="container nav-conteudo">
+
+            <div class="logo">
+
+                <div class="logo-caixa"></div>
+
+                <span>
+                    Magdala
+                    <span class="logo-secundario">/ PORTAL</span>
+                </span>
+
+            </div>
+
+            <div class="usuario">
+
+                <div class="usuario-icone">◉</div>
+
+                <span>
+                    {{ request.user.username }}
+                </span>
+
+            </div>
+
+        </div>
+    </nav>
+
+    <main>
+
+        <section class="hero container">
+
+            <h1>Painel Administrativo</h1>
+
+        </section>
+
+        <div class="divisor container"></div>
+
+        <section class="destaques container">
+
+            <div class="cards">
+
+                <button onclick="window.location.href = '{% url 'cadastrar_pessoa' %}'" >
+                    Cadastro de pessoas
+                </button>
+
+                <button onclick="window.location.href = '{% url 'listar_pessoas' %}'" >
+                    Listar pessoas
+                </button>
+                <button onclick="window.location.href = '{% url 'listar_solicitacoes' %}'">Solicitações de cadastro</button>
+                <button class="destaque" onclick="window.location.href = '{% url 'listar_especialidades' %}'">Especialidades</button>
+                <button onclick="window.location.href = '{% url 'interface' 'atendimentos' %}'">Atendimentos</button>
+
+                <button onclick="window.location.href = '{% url 'interface' 'profissionais' %}'">Profissionais</button>
+                <button onclick="window.location.href = '{% url 'interface' 'agenda' %}'">Agenda</button>
+                <button onclick="window.location.href = '{% url 'interface' 'cursos' %}'">Cursos</button>
+                <button onclick="window.location.href = '{% url 'interface' 'relatorios' %}'">Relatórios</button>
+                <button onclick="window.location.href = '{% url 'interface' 'usuarios' %}'">Usuários</button>
+
+                <button onclick="window.location.href = '{% url 'interface' 'dashboard' %}'">Dashboard</button>
+                <button onclick="window.location.href = '{% url 'interface' 'configuracoes' %}'">Configurações</button>
+                <button>-</button>
+                <button>-</button>
+                <button>-</button>
+
+                <button>-</button>
+                <button>-</button>
+                <button>-</button>
+                <button>-</button>
+                <button>-</button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+
+        <div class="container footer-conteudo">
+
+            <p>
+                © 2024 Portal Corporativo.
+                Todos os direitos reservados.
+                Ambiente de acesso restrito e monitorado.
+            </p>
+
+            <div class="links-footer">
+
+                <a href="#">Política de Privacidade</a>
+                <a href="#">Suporte</a>
+                <a href="#">Termos de Uso</a>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+</body>
+
+</html>
