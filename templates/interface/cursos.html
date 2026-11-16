@@ -1,0 +1,208 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cursos e Capacitações – Casa Maria de Magdala</title>
+  <link rel="stylesheet" href="{% static 'css/interface/sistema.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/interface/cursos.css' %}" />
+</head>
+<body>
+
+  <nav class="nav-topo">
+    <a href="/interface/sistema/" class="nav-voltar">← Voltar ao Painel</a>
+    <span class="nav-titulo">Casa Maria de Magdala</span>
+    <a href="/interface/login/" class="nav-sair">Sair</a>
+  </nav>
+
+  <main class="container">
+    <header class="cabecalho-pagina">
+      <div>
+        <h1>Cursos e Capacitações</h1>
+        <p class="subtitulo">Atividades de capacitação e cultura da ONG</p>
+      </div>
+      <button class="botao-primario" onclick="abrirModalNovoCurso()">+ Novo Curso</button>
+    </header>
+
+    <div class="filtros-cursos">
+      <button class="btn-filtro-curso ativo" onclick="filtrarCursos('todos', this)">Todos</button>
+      <button class="btn-filtro-curso" onclick="filtrarCursos('ativo', this)">Ativo</button>
+      <button class="btn-filtro-curso" onclick="filtrarCursos('aguardando', this)">Aguardando Horário</button>
+      <button class="btn-filtro-curso" onclick="filtrarCursos('encerrado', this)">Encerrado</button>
+    </div>
+
+    <div class="grade-cursos" id="gradeCursos">
+
+      <!-- Card 1 -->
+      <div class="card-curso" data-status="aguardando">
+        <div class="card-curso-topo">
+          <span class="card-curso-nome">Curso de Refrigeração</span>
+          <span class="badge-categoria badge-capacitacao">Capacitação</span>
+        </div>
+        <p class="card-curso-horario">📅 Terça ou Quinta (Noite)</p>
+        <p class="card-curso-profissional">👤 Profissional a definir</p>
+        <div class="card-curso-rodape">
+          <span class="badge-status-curso badge-aguardando">Aguardando Horário</span>
+          <button class="botao-editar" onclick="editarCurso(this)">Editar</button>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="card-curso" data-status="aguardando">
+        <div class="card-curso-topo">
+          <span class="card-curso-nome">Manutenção de Máquina de Lavar</span>
+          <span class="badge-categoria badge-capacitacao">Capacitação</span>
+        </div>
+        <p class="card-curso-horario">📅 Sábado (Manhã)</p>
+        <p class="card-curso-profissional">👤 Profissional a definir</p>
+        <div class="card-curso-rodape">
+          <span class="badge-status-curso badge-aguardando">Aguardando Horário</span>
+          <button class="botao-editar" onclick="editarCurso(this)">Editar</button>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="card-curso" data-status="aguardando">
+        <div class="card-curso-topo">
+          <span class="card-curso-nome">Manutenção de Micro-ondas</span>
+          <span class="badge-categoria badge-capacitacao">Capacitação</span>
+        </div>
+        <p class="card-curso-horario">📅 Sábado (Manhã)</p>
+        <p class="card-curso-profissional">👤 Profissional a definir</p>
+        <div class="card-curso-rodape">
+          <span class="badge-status-curso badge-aguardando">Aguardando Horário</span>
+          <button class="botao-editar" onclick="editarCurso(this)">Editar</button>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="card-curso" data-status="aguardando">
+        <div class="card-curso-topo">
+          <span class="card-curso-nome">Reforço Escolar</span>
+          <span class="badge-categoria badge-educacao">Educação</span>
+        </div>
+        <p class="card-curso-horario">📅 Segunda a Sexta (Contra-turno)</p>
+        <p class="card-curso-profissional">👤 Profissional a definir</p>
+        <div class="card-curso-rodape">
+          <span class="badge-status-curso badge-aguardando">Aguardando Horário</span>
+          <button class="botao-editar" onclick="editarCurso(this)">Editar</button>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="card-curso" data-status="aguardando">
+        <div class="card-curso-topo">
+          <span class="card-curso-nome">Teatro</span>
+          <span class="badge-categoria badge-cultura">Cultura e Arte</span>
+        </div>
+        <p class="card-curso-horario">📅 Sexta (Noite) ou Sábado</p>
+        <p class="card-curso-profissional">👤 Profissional a definir</p>
+        <div class="card-curso-rodape">
+          <span class="badge-status-curso badge-aguardando">Aguardando Horário</span>
+          <button class="botao-editar" onclick="editarCurso(this)">Editar</button>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="card-curso" data-status="ativo">
+        <div class="card-curso-topo">
+          <span class="card-curso-nome">Pintura em Tecido</span>
+          <span class="badge-categoria badge-artesanato">Artesanato</span>
+        </div>
+        <p class="card-curso-horario">📅 Seg 09:00–11:00 | Qua 09:00–11:00</p>
+        <p class="card-curso-profissional">👤 Maria Helena</p>
+        <div class="card-curso-rodape">
+          <span class="badge-status-curso badge-ativo">Ativo</span>
+          <button class="botao-editar" onclick="editarCurso(this)">Editar</button>
+        </div>
+      </div>
+
+      <!-- Card 7 -->
+      <div class="card-curso" data-status="ativo">
+        <div class="card-curso-topo">
+          <span class="card-curso-nome">Crochê</span>
+          <span class="badge-categoria badge-artesanato">Artesanato</span>
+        </div>
+        <p class="card-curso-horario">📅 Qua 09:00–11:00</p>
+        <p class="card-curso-profissional">👤 Wanda</p>
+        <div class="card-curso-rodape">
+          <span class="badge-status-curso badge-ativo">Ativo</span>
+          <button class="botao-editar" onclick="editarCurso(this)">Editar</button>
+        </div>
+      </div>
+
+      <!-- Card 8 -->
+      <div class="card-curso" data-status="ativo">
+        <div class="card-curso-topo">
+          <span class="card-curso-nome">Costura Criativa</span>
+          <span class="badge-categoria badge-artesanato">Artesanato</span>
+        </div>
+        <p class="card-curso-horario">📅 Sex 14:00–17:00</p>
+        <p class="card-curso-profissional">👤 Andréa</p>
+        <div class="card-curso-rodape">
+          <span class="badge-status-curso badge-ativo">Ativo</span>
+          <button class="botao-editar" onclick="editarCurso(this)">Editar</button>
+        </div>
+      </div>
+
+    </div><!-- /grade-cursos -->
+
+    <!-- Modal Novo Curso -->
+    <div class="modal-aviso" id="modalNovoCurso">
+      <div class="modal-conteudo">
+        <div class="modal-cabecalho">
+          <h2>Novo Curso</h2>
+          <button class="modal-fechar" onclick="fecharModalNovoCurso()">×</button>
+        </div>
+        <div class="modal-corpo">
+          <div class="campo-form">
+            <label for="cursoNome">Nome do Curso *</label>
+            <input type="text" id="cursoNome" placeholder="Ex: Informática Básica" />
+          </div>
+          <div class="campo-form">
+            <label for="cursoCategoria">Categoria</label>
+            <select id="cursoCategoria">
+              <option value="artesanato">Artesanato</option>
+              <option value="capacitacao">Capacitação</option>
+              <option value="educacao">Educação</option>
+              <option value="cultura">Cultura e Arte</option>
+            </select>
+          </div>
+          <div class="campo-form">
+            <label for="cursoDiasHorario">Dias e Horário</label>
+            <input type="text" id="cursoDiasHorario" placeholder="Ex: Segunda e Quarta, 09:00–11:00" />
+          </div>
+          <div class="campo-form">
+            <label for="cursoProfissional">Profissional</label>
+            <input type="text" id="cursoProfissional" placeholder="Nome do profissional" />
+          </div>
+          <div class="campo-form">
+            <label for="cursoStatus">Status</label>
+            <select id="cursoStatus">
+              <option value="ativo">Ativo</option>
+              <option value="aguardando">Aguardando Horário</option>
+              <option value="encerrado">Encerrado</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-rodape">
+          <button class="botao-secundario" onclick="fecharModalNovoCurso()">Cancelar</button>
+          <button class="botao-primario" onclick="salvarNovoCurso()">Salvar</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="toast-curso" class="toast" style="display:none;"></div>
+
+  </main>
+
+  <footer class="rodape-pagina">
+    <a href="/interface/especialidades/">Especialidades</a>
+    <a href="/interface/agenda/">Agenda</a>
+  </footer>
+
+  <script src="{% static 'js/interface/cursos.js' %}"></script>
+  <script src="{% static 'js/interface/excluir.js' %}"></script>
+</body>
+</html>

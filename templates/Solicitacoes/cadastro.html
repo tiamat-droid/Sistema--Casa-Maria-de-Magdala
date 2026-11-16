@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitar cadastro - Casa Maria de Magdala</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/solicitacoes.css' %}">
+</head>
+<body>
+    <main>
+        <h1>Solicitação de cadastro</h1>
+
+        <p>
+            Preencha os dados abaixo para enviar uma solicitação
+            de cadastro à Casa Maria de Magdala.
+        </p>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            {{ form.non_field_errors }}
+
+            {% for field in form %}
+                <div class="form-field">
+                    <label for="{{ field.id_for_label }}">
+                        {{ field.label }}
+                    </label>
+
+                    {{ field }}
+
+                    {% if field.errors %}
+                        <div class="form-error">
+                            {{ field.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            <div style="display:flex; gap:14px; align-items:center; margin-top:16px;">
+                <button type="submit">
+                    Enviar solicitação
+                </button>
+                <a href="/pessoas.html" style="padding:12px 18px; border-radius:7px; border:1px solid #d8c8ce; color:#781f37; text-decoration:none;">
+                    ← Voltar ao Sistema
+                </a>
+            </div>
+        </form>
+    </main>
+</body>
+</html>

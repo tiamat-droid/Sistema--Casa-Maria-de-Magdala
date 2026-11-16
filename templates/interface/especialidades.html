@@ -1,0 +1,507 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Especialidades | Casa Maria de Magdala</title>
+
+    <link rel="stylesheet" href="{% static 'css/interface/sistema.css' %}">
+    <link rel="stylesheet" href="{% static 'css/interface/especialidades.css' %}">
+</head>
+
+<body>
+
+    <header class="barra-institucional">
+        <div class="container barra-conteudo">
+            <span>Maria de Magdala — Área Restrita</span>
+            <span class="ambiente">Ambiente de Gestão Interna</span>
+        </div>
+    </header>
+
+    <nav class="navegacao">
+        <div class="container nav-conteudo">
+            <div class="logo">
+                <div class="logo-caixa">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                </div>
+                <span>Magdala <span class="logo-secundario">/ ESPECIALIDADES</span></span>
+            </div>
+            <div class="usuario">
+                <a href="/interface/sistema/" class="btn-nav">← Voltar ao Painel</a>
+                <a href="/interface/login/" class="botao-sair">Sair</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container principal-espec">
+
+        <div class="painel-topo">
+            <div>
+                <p class="tag-secao">CATÁLOGO INSTITUCIONAL</p>
+                <h1>Especialidades e Serviços</h1>
+                <p class="subtitulo">22 especialidades organizadas em 4 categorias. Confirmadas pela coordenação da Casa Maria de Magdala.</p>
+            </div>
+            <button class="botao-primario" onclick="abrirModalNovaEspecialidade()">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                Nova Especialidade
+            </button>
+        </div>
+
+        <!-- Filtros de Categoria -->
+        <div class="filtros-categoria">
+            <button class="btn-categoria ativo" data-categoria="todas" onclick="filtrarCategoria('todas', this)">Todas (22)</button>
+            <button class="btn-categoria" data-categoria="terapeutica" onclick="filtrarCategoria('terapeutica', this)">🩺 Terapêutica (11)</button>
+            <button class="btn-categoria" data-categoria="artesanato" onclick="filtrarCategoria('artesanato', this)">🎨 Artesanato (4)</button>
+            <button class="btn-categoria" data-categoria="capacitacao" onclick="filtrarCategoria('capacitacao', this)">🔧 Capacitação (3)</button>
+            <button class="btn-categoria" data-categoria="educacao" onclick="filtrarCategoria('educacao', this)">📚 Educação e Cultura (2)</button>
+        </div>
+
+        <!-- CATEGORIA: Parte Terapêutica -->
+        <section class="secao-categoria" data-grupo="terapeutica">
+            <div class="cabecalho-categoria">
+                <div class="icone-categoria icone-terapeutica">🩺</div>
+                <div>
+                    <h2>Parte Terapêutica</h2>
+                    <p>Serviços de saúde, bem-estar e assistência social — 11 especialidades</p>
+                </div>
+            </div>
+
+            <div class="grade-especialidades">
+
+                <div class="card-especialidade" data-categoria="terapeutica">
+                    <div class="esp-topo">
+                        <span class="esp-nome">Fisioterapia médica</span>
+                        <span class="esp-badge badge-ativo">Ativa</span>
+                    </div>
+                    <p class="esp-desc">Reabilitação físico-motora para adultos. Profissional: <strong>Cristina</strong> e <strong>João</strong>.</p>
+                    <div class="esp-rodape">
+                        <span class="esp-atendimentos">— atendimentos ativos</span>
+                        <div class="esp-acoes">
+                            <button class="btn-acao-esp" title="Editar">✏️</button>
+                            <button class="btn-acao-esp" title="Ver atendimentos" onclick="window.location.href='/interface/atendimentos/'">📋</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-especialidade" data-categoria="terapeutica">
+                    <div class="esp-topo">
+                        <span class="esp-nome">Fisioterapia pediátrica</span>
+                        <span class="esp-badge badge-ativo">Ativa</span>
+                    </div>
+                    <p class="esp-desc">Reabilitação físico-motora para crianças e adolescentes.</p>
+                    <div class="esp-rodape">
+                        <span class="esp-atendimentos">— atendimentos ativos</span>
+                        <div class="esp-acoes">
+                            <button class="btn-acao-esp" title="Editar">✏️</button>
+                            <button class="btn-acao-esp" title="Ver atendimentos" onclick="window.location.href='/interface/atendimentos/'">📋</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-especialidade" data-categoria="terapeutica">
+                    <div class="esp-topo">
+                        <span class="esp-nome">Fonoaudiologia</span>
+                        <span class="esp-badge badge-ativo">Ativa</span>
+                    </div>
+                    <p class="esp-desc">Avaliação e tratamento de distúrbios da comunicação. Profissional: <strong>Mara</strong>.</p>
+                    <div class="esp-rodape">
+                        <span class="esp-atendimentos">— atendimentos ativos</span>
+                        <div class="esp-acoes">
+                            <button class="btn-acao-esp" title="Editar">✏️</button>
+                            <button class="btn-acao-esp" title="Ver atendimentos" onclick="window.location.href='/interface/atendimentos/'">📋</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-especialidade" data-categoria="terapeutica">
+                    <div class="esp-topo">
+                        <span class="esp-nome">Acupuntura</span>
+                        <span class="esp-badge badge-ativo">Ativa</span>
+                    </div>
+                    <p class="esp-desc">Terapia baseada em pontos energéticos. Profissional: <strong>Alessandra</strong>.</p>
+                    <div class="esp-rodape">
+                        <span class="esp-atendimentos">— atendimentos ativos</span>
+                        <div class="esp-acoes">
+                            <button class="btn-acao-esp" title="Editar">✏️</button>
+                            <button class="btn-acao-esp" title="Ver atendimentos" onclick="window.location.href='/interface/atendimentos/'">📋</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-especialidade" data-categoria="terapeutica">
+                    <div class="esp-topo">
+                        <span class="esp-nome">Massagem terapêutica</span>
+                        <span class="esp-badge badge-ativo">Ativa</span>
+                    </div>
+                    <p class="esp-desc">Massoterapia e terapia corporal. Profissional: <strong>Telma</strong>.</p>
+                    <div class="esp-rodape">
+                        <span class="esp-atendimentos">— atendimentos ativos</span>
+                        <div class="esp-acoes">
+                            <button class="btn-acao-esp" title="Editar">✏️</button>
+                            <button class="btn-acao-esp" title="Ver atendimentos" onclick="window.location.href='/interface/atendimentos/'">📋</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-especialidade" data-categoria="terapeutica">
+                    <div class="esp-topo">
+                        <span class="esp-nome">Reflexologia</span>
+                        <span class="esp-badge badge-ativo">Ativa</span>
+                    </div>
+                    <p class="esp-desc">Estimulação de pontos reflexos nos pés e mãos.</p>
+                    <div class="esp-rodape">
+                        <span class="esp-atendimentos">— atendimentos ativos</span>
+                        <div class="esp-acoes">
+                            <button class="btn-acao-esp" title="Editar">✏️</button>
+                            <button class="btn-acao-esp" title="Ver atendimentos" onclick="window.location.href='/interface/atendimentos/'">📋</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-especialidade" data-categoria="terapeutica">
+                    <div class="esp-topo">
+                        <span class="esp-nome">Reiki</span>
+                        <span class="esp-badge badge-ativo">Ativa</span>
+                    </div>
+                    <p class="esp-desc">Terapia energética de canalização e equilíbrio.</p>
+                    <div class="esp-rodape">
+                        <span class="esp-atendimentos">— atendimentos ativos</span>
+                        <div class="esp-acoes">
+                            <button class="btn-acao-esp" title="Editar">✏️</button>
+                            <button class="btn-acao-esp" title="Ver atendimentos" onclick="window.location.href='/interface/atendimentos/'">📋</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-especialidade" data-categoria="terapeutica">
+                    <div class="esp-topo">
+                        <span class="esp-nome">Nutrição</span>
+                        <span class="esp-badge badge-ativo">Ativa</span>
+                    </div>
+                    <p class="esp-desc">Acompanhamento nutricional e orientação alimentar. Profissional: <strong>Bruna</strong>.</p>
+                    <div class="esp-rodape">
+                        <span class="esp-atendimentos">— atendimentos ativos</span>
+                        <div class="esp-acoes">
+                            <button class="btn-acao-esp" title="Editar">✏️</button>
+                            <button class="btn-acao-esp" title="Ver atendimentos" onclick="window.location.href='/interface/atendimentos/'">📋</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-especialidade" data-categoria="terapeutica">
+                    <div class="esp-topo">
+                        <span class="esp-nome">Psicologia</span>
+                        <span class="esp-badge badge-ativo">Ativa</span>
+                    </div>
+                    <p class="esp-desc">Atendimento psicológico individual. Profissionais: <strong>Valéria</strong> e <strong>Ana Maria</strong>.</p>
+                    <div class="esp-rodape">
+                        <span class="esp-atendimentos">— atendimentos ativos</span>
+                        <div class="esp-acoes">
+                            <button class="btn-acao-esp" title="Editar">✏️</button>
+                            <button class="btn-acao-esp" title="Ver atendimentos" onclick="window.location.href='/interface/atendimentos/'">📋</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-especialidade" data-categoria="terapeutica">
+                    <div class="esp-topo">
+                        <span class="esp-nome">Assistência jurídica</span>
+                        <span class="esp-badge badge-ativo">Ativa</span>
+                    </div>
+                    <p class="esp-desc">Orientação e suporte legal. Profissional: <strong>Dra. Elvira</strong>.</p>
+                    <div class="esp-rodape">
+                        <span class="esp-atendimentos">— atendimentos ativos</span>
+                        <div class="esp-acoes">
+                            <button class="btn-acao-esp" title="Editar">✏️</button>
+                            <button class="btn-acao-esp" title="Ver atendimentos" onclick="window.location.href='/interface/atendimentos/'">📋</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-especialidade" data-categoria="terapeutica">
+                    <div class="esp-topo">
+                        <span class="esp-nome">Serviço social</span>
+                        <span class="esp-badge badge-ativo">Ativa</span>
+                    </div>
+                    <p class="esp-desc">Assistência e orientação social às pessoas atendidas.</p>
+                    <div class="esp-rodape">
+                        <span class="esp-atendimentos">— atendimentos ativos</span>
+                        <div class="esp-acoes">
+                            <button class="btn-acao-esp" title="Editar">✏️</button>
+                            <button class="btn-acao-esp" title="Ver atendimentos" onclick="window.location.href='/interface/atendimentos/'">📋</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- CATEGORIA: Artesanato -->
+        <section class="secao-categoria" data-grupo="artesanato">
+            <div class="cabecalho-categoria">
+                <div class="icone-categoria icone-artesanato">🎨</div>
+                <div>
+                    <h2>Artesanato</h2>
+                    <p>Atividades manuais, criativas e de expressão — 4 especialidades</p>
+                </div>
+            </div>
+
+            <div class="grade-especialidades">
+
+                <div class="card-especialidade" data-categoria="artesanato">
+                    <div class="esp-topo">
+                        <span class="esp-nome">Pintura em tecido</span>
+                        <span class="esp-badge badge-ativo">Ativa</span>
+                    </div>
+                    <p class="esp-desc">Técnicas de pintura artística em tecido. Profissional: <strong>Maria Helena</strong>.</p>
+                    <div class="esp-rodape">
+                        <span class="esp-atendimentos">Qua: 09h às 11h</span>
+                        <div class="esp-acoes">
+                            <button class="btn-acao-esp" title="Editar">✏️</button>
+                            <button class="btn-acao-esp" title="Ver agenda" onclick="window.location.href='/interface/agenda/'">📅</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-especialidade" data-categoria="artesanato">
+                    <div class="esp-topo">
+                        <span class="esp-nome">Crochê</span>
+                        <span class="esp-badge badge-ativo">Ativa</span>
+                    </div>
+                    <p class="esp-desc">Trabalho artesanal com agulha e fio. Profissional: <strong>Wanda</strong>.</p>
+                    <div class="esp-rodape">
+                        <span class="esp-atendimentos">Qua: 09h às 11h</span>
+                        <div class="esp-acoes">
+                            <button class="btn-acao-esp" title="Editar">✏️</button>
+                            <button class="btn-acao-esp" title="Ver agenda" onclick="window.location.href='/interface/agenda/'">📅</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-especialidade" data-categoria="artesanato">
+                    <div class="esp-topo">
+                        <span class="esp-nome">Bijuteria</span>
+                        <span class="esp-badge badge-ativo">Ativa</span>
+                    </div>
+                    <p class="esp-desc">Confecção artesanal de acessórios e adornos.</p>
+                    <div class="esp-rodape">
+                        <span class="esp-atendimentos">— atendimentos ativos</span>
+                        <div class="esp-acoes">
+                            <button class="btn-acao-esp" title="Editar">✏️</button>
+                            <button class="btn-acao-esp" title="Ver agenda" onclick="window.location.href='/interface/agenda/'">📅</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-especialidade" data-categoria="artesanato">
+                    <div class="esp-topo">
+                        <span class="esp-nome">Costura criativa</span>
+                        <span class="esp-badge badge-ativo">Ativa</span>
+                    </div>
+                    <p class="esp-desc">Corte, costura e customização criativa. Profissional: <strong>Andréa</strong>.</p>
+                    <div class="esp-rodape">
+                        <span class="esp-atendimentos">— atendimentos ativos</span>
+                        <div class="esp-acoes">
+                            <button class="btn-acao-esp" title="Editar">✏️</button>
+                            <button class="btn-acao-esp" title="Ver agenda" onclick="window.location.href='/interface/agenda/'">📅</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- CATEGORIA: Capacitação -->
+        <section class="secao-categoria" data-grupo="capacitacao">
+            <div class="cabecalho-categoria">
+                <div class="icone-categoria icone-capacitacao">🔧</div>
+                <div>
+                    <h2>Cursos de Capacitação</h2>
+                    <p>Formação profissional e técnica — 3 especialidades</p>
+                </div>
+            </div>
+
+            <div class="grade-especialidades">
+
+                <div class="card-especialidade" data-categoria="capacitacao">
+                    <div class="esp-topo">
+                        <span class="esp-nome">Refrigeração</span>
+                        <span class="esp-badge badge-ativo">Ativa</span>
+                    </div>
+                    <p class="esp-desc">Capacitação técnica em instalação e manutenção de sistemas de refrigeração.</p>
+                    <div class="esp-rodape">
+                        <span class="esp-atendimentos">— atendimentos ativos</span>
+                        <div class="esp-acoes">
+                            <button class="btn-acao-esp" title="Editar">✏️</button>
+                            <button class="btn-acao-esp" title="Ver cursos" onclick="window.location.href='/interface/cursos/'">🎓</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-especialidade" data-categoria="capacitacao">
+                    <div class="esp-topo">
+                        <span class="esp-nome">Manutenção de máquina de lavar</span>
+                        <span class="esp-badge badge-ativo">Ativa</span>
+                    </div>
+                    <p class="esp-desc">Reparo e manutenção de eletrodomésticos de lavar.</p>
+                    <div class="esp-rodape">
+                        <span class="esp-atendimentos">— atendimentos ativos</span>
+                        <div class="esp-acoes">
+                            <button class="btn-acao-esp" title="Editar">✏️</button>
+                            <button class="btn-acao-esp" title="Ver cursos" onclick="window.location.href='/interface/cursos/'">🎓</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-especialidade" data-categoria="capacitacao">
+                    <div class="esp-topo">
+                        <span class="esp-nome">Manutenção de micro-ondas</span>
+                        <span class="esp-badge badge-ativo">Ativa</span>
+                    </div>
+                    <p class="esp-desc">Reparo e manutenção de fornos de micro-ondas.</p>
+                    <div class="esp-rodape">
+                        <span class="esp-atendimentos">— atendimentos ativos</span>
+                        <div class="esp-acoes">
+                            <button class="btn-acao-esp" title="Editar">✏️</button>
+                            <button class="btn-acao-esp" title="Ver cursos" onclick="window.location.href='/interface/cursos/'">🎓</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- CATEGORIA: Educação e Cultura -->
+        <section class="secao-categoria" data-grupo="educacao">
+            <div class="cabecalho-categoria">
+                <div class="icone-categoria icone-educacao">📚</div>
+                <div>
+                    <h2>Educação e Cultura</h2>
+                    <p>Atividades culturais, artísticas e de reforço escolar — 2 especialidades</p>
+                </div>
+            </div>
+
+            <div class="grade-especialidades">
+
+                <div class="card-especialidade" data-categoria="educacao">
+                    <div class="esp-topo">
+                        <span class="esp-nome">Reforço escolar</span>
+                        <span class="esp-badge badge-ativo">Ativa</span>
+                    </div>
+                    <p class="esp-desc">Suporte acadêmico e apoio à aprendizagem escolar.</p>
+                    <div class="esp-rodape">
+                        <span class="esp-atendimentos">— atendimentos ativos</span>
+                        <div class="esp-acoes">
+                            <button class="btn-acao-esp" title="Editar">✏️</button>
+                            <button class="btn-acao-esp" title="Ver agenda" onclick="window.location.href='/interface/agenda/'">📅</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-especialidade" data-categoria="educacao">
+                    <div class="esp-topo">
+                        <span class="esp-nome">Teatro</span>
+                        <span class="esp-badge badge-ativo">Ativa</span>
+                    </div>
+                    <p class="esp-desc">Expressão corporal, improvisação e encenação teatral.</p>
+                    <div class="esp-rodape">
+                        <span class="esp-atendimentos">— atendimentos ativos</span>
+                        <div class="esp-acoes">
+                            <button class="btn-acao-esp" title="Editar">✏️</button>
+                            <button class="btn-acao-esp" title="Ver agenda" onclick="window.location.href='/interface/agenda/'">📅</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Modal: Nova Especialidade -->
+    <div id="modalNovaEsp" class="modal-aviso">
+        <div class="modal-conteudo modal-form">
+            <h3>Nova Especialidade</h3>
+            <p style="color: var(--texto-secundario); margin-bottom: 20px; font-size: 14px;">Adicione uma nova especialidade ao catálogo da ONG.</p>
+
+            <div class="campo-form">
+                <label>Nome da especialidade *</label>
+                <input type="text" id="novaEspNome" placeholder="Ex: Terapia Ocupacional">
+            </div>
+            <div class="campo-form">
+                <label>Categoria *</label>
+                <select id="novaEspCategoria">
+                    <option value="">Selecione</option>
+                    <option value="terapeutica">Parte Terapêutica</option>
+                    <option value="artesanato">Artesanato</option>
+                    <option value="capacitacao">Capacitação</option>
+                    <option value="educacao">Educação e Cultura</option>
+                </select>
+            </div>
+            <div class="campo-form">
+                <label>Descrição</label>
+                <input type="text" id="novaEspDesc" placeholder="Breve descrição do serviço">
+            </div>
+
+            <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 24px;">
+                <button class="btn-modal-sec" onclick="fecharModalNovaEsp()">Cancelar</button>
+                <button class="btn-modal-prim" onclick="salvarNovaEsp()">Salvar Especialidade</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container footer-conteudo">
+            <p>© 2026 Casa Maria de Magdala — Dados confirmados em Set/2026 com a coordenação da ONG.</p>
+            <div class="links-footer">
+                <a href="/interface/atendimentos/">Atendimentos</a>
+                <a href="/interface/profissionais/">Profissionais</a>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Modal: Editar Especialidade -->
+    <div id="modalEditarEsp" class="modal-aviso">
+        <div class="modal-conteudo modal-form">
+            <h3>Editar Especialidade</h3>
+            <p style="color: var(--texto-secundario); margin-bottom: 20px; font-size: 14px;">Altere os dados da especialidade selecionada.</p>
+
+            <div class="campo-form">
+                <label for="editEspNome">Nome da especialidade *</label>
+                <input type="text" id="editEspNome" placeholder="Nome da especialidade" />
+            </div>
+            <div class="campo-form">
+                <label for="editEspDesc">Descrição</label>
+                <input type="text" id="editEspDesc" placeholder="Breve descrição do serviço" />
+            </div>
+            <div class="campo-form">
+                <label for="editEspStatus">Situação</label>
+                <select id="editEspStatus">
+                    <option value="ativo">Ativa</option>
+                    <option value="inativo">Inativa</option>
+                </select>
+            </div>
+
+            <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 24px;">
+                <button class="btn-modal-sec" onclick="fecharModalEditarEsp()">Cancelar</button>
+                <button class="btn-modal-prim" onclick="salvarEdicaoEsp()">Salvar Alterações</button>
+            </div>
+        </div>
+    </div>
+    <div class="toast-sucesso" id="toastEsp"></div>
+    <script src="{% static 'js/interface/especialidades.js' %}"></script>
+
+  <script src="{% static 'js/interface/excluir.js' %}"></script>
+</body>
+</html>
+
+

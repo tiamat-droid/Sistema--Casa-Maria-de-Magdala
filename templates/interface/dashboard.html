@@ -1,0 +1,122 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard – Casa Maria de Magdala</title>
+  <link rel="stylesheet" href="{% static 'css/interface/sistema.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/interface/dashboard.css' %}" />
+</head>
+<body>
+
+  <nav class="nav-topo">
+    <a href="/interface/sistema/" class="nav-voltar">← Voltar ao Painel</a>
+    <span class="nav-titulo">Casa Maria de Magdala</span>
+    <a href="/interface/login/" class="nav-sair">Sair</a>
+  </nav>
+
+  <main class="container">
+    <header class="cabecalho-pagina">
+      <div>
+        <h1>Dashboard</h1>
+        <p class="subtitulo">Visão geral do sistema</p>
+      </div>
+    </header>
+
+    <!-- Indicadores -->
+    <section class="secao-dashboard">
+      <div class="grade-indicadores">
+        <div class="card-indicador">
+          <div class="icone">👥</div>
+          <div class="numero" data-valor="0">0</div>
+          <div class="label">Total de Pessoas</div>
+        </div>
+        <div class="card-indicador">
+          <div class="icone">❤️</div>
+          <div class="numero" data-valor="0">0</div>
+          <div class="label">Atendimentos Ativos</div>
+        </div>
+        <div class="card-indicador">
+          <div class="icone">⭐</div>
+          <div class="numero" data-valor="22">0</div>
+          <div class="label">Especialidades Ativas</div>
+        </div>
+        <div class="card-indicador">
+          <div class="icone">👤</div>
+          <div class="numero" data-valor="12">0</div>
+          <div class="label">Profissionais Cadastrados</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Agenda de Hoje -->
+    <section class="secao-dashboard">
+      <div class="secao-cabecalho">
+        <h2>Agenda de Hoje</h2>
+        <span id="diaSemanaHoje" class="dia-semana-tag"></span>
+      </div>
+      <div id="agendaHoje" class="agenda-hoje">
+        <!-- Preenchido via dashboard.js -->
+      </div>
+    </section>
+
+    <!-- Atalhos Rápidos -->
+    <section class="secao-dashboard">
+      <div class="secao-cabecalho">
+        <h2>Atalhos Rápidos</h2>
+      </div>
+      <div class="grade-atalhos">
+        <a href="/interface/pessoas/" class="card-atalho">
+          <span class="atalho-icone">👥</span>
+          <span class="atalho-titulo">Pessoas</span>
+          <span class="atalho-desc">Cadastro e busca de assistidos</span>
+        </a>
+        <a href="/interface/especialidades/" class="card-atalho">
+          <span class="atalho-icone">🩺</span>
+          <span class="atalho-titulo">Especialidades</span>
+          <span class="atalho-desc">Serviços e atendimentos da ONG</span>
+        </a>
+        <a href="/interface/atendimentos/" class="card-atalho">
+          <span class="atalho-icone">📋</span>
+          <span class="atalho-titulo">Atendimentos</span>
+          <span class="atalho-desc">Registro e fila de espera</span>
+        </a>
+        <a href="/interface/profissionais/" class="card-atalho">
+          <span class="atalho-icone">👤</span>
+          <span class="atalho-titulo">Profissionais</span>
+          <span class="atalho-desc">Voluntários e especialistas</span>
+        </a>
+        <a href="/interface/agenda/" class="card-atalho">
+          <span class="atalho-icone">📅</span>
+          <span class="atalho-titulo">Agenda</span>
+          <span class="atalho-desc">Cronograma semanal da ONG</span>
+        </a>
+        <a href="/interface/cursos/" class="card-atalho">
+          <span class="atalho-icone">🎓</span>
+          <span class="atalho-titulo">Cursos</span>
+          <span class="atalho-desc">Capacitações e oficinas</span>
+        </a>
+        <a href="/interface/relatorios/" class="card-atalho">
+          <span class="atalho-icone">📊</span>
+          <span class="atalho-titulo">Relatórios</span>
+          <span class="atalho-desc">Estatísticas e indicadores</span>
+        </a>
+        <a href="/interface/usuarios/" class="card-atalho">
+          <span class="atalho-icone">⚙️</span>
+          <span class="atalho-titulo">Usuários</span>
+          <span class="atalho-desc">Gestão de acesso e sistema</span>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="rodape-pagina">
+    <a href="/interface/pessoas/">Pessoas</a>
+    <a href="/interface/agenda/">Agenda</a>
+  </footer>
+
+  <script src="{% static 'js/interface/dashboard.js' %}"></script>
+</body>
+</html>

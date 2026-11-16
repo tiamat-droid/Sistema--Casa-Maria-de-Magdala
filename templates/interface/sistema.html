@@ -1,0 +1,313 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Principal | Casa Maria de Magdala</title>
+
+    <!-- Folha de estilo separada -->
+    <link rel="stylesheet" href="{% static 'css/interface/sistema.css' %}">
+</head>
+
+<body>
+
+    <header class="barra-institucional">
+        <div class="container barra-conteudo">
+            <span>Maria de Magdala — Área Restrita</span>
+            <span class="ambiente">Ambiente de Gestão Interna</span>
+        </div>
+    </header>
+
+    <nav class="navegacao">
+        <div class="container nav-conteudo">
+
+            <div class="logo">
+                <div class="logo-caixa">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                </div>
+
+                <span>
+                    Magdala
+                    <span class="logo-secundario">/ PORTAL</span>
+                </span>
+            </div>
+
+            <div class="usuario">
+                <div class="usuario-icone">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </div>
+                <span>Coordenação (Online)</span>
+                <a href="/interface/login/" class="botao-sair" title="Encerrar Sessão">Sair</a>
+            </div>
+
+        </div>
+    </nav>
+
+    <main>
+
+        <section class="hero container">
+            <div class="hero-texto">
+                <p class="tag-secao">SISTEMA DE GERENCIAMENTO INTEGRADO</p>
+                <h1>Painel principal do sistema</h1>
+                <p class="subtitulo">
+                    Selecione um módulo abaixo para gerenciar atendimentos, pessoas, especialidades e relatórios da instituição.
+                </p>
+            </div>
+
+            <div class="busca-container">
+                <div class="campo-busca">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <input type="text" id="filtroModulos" placeholder="Buscar módulo ou funcionalidade rápida (ex: Pessoas, Cursos, Relatórios)..." autocomplete="off">
+                </div>
+                <span class="contador-modulos" id="contadorModulos">10 módulos disponíveis</span>
+            </div>
+        </section>
+
+        <div class="divisor container"></div>
+
+        <section class="secao-modulos container">
+
+            <div class="grade-modulos" id="gradeModulos">
+
+                <!-- 01. Pessoas -->
+                <a href="/interface/pessoas/" class="card-modulo destaque-card" data-busca="pessoas cadastro consulta ficha assistidos acolhidos">
+                    <div class="card-icone-wrap icone-azul">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                    </div>
+                    <div class="card-info">
+                        <div class="card-cabecalho">
+                            <h3>Pessoas</h3>
+                            <span class="badge-tag">Principal</span>
+                        </div>
+                        <p class="card-desc">Cadastro e consulta de pessoas atendidas e acolhidos</p>
+                    </div>
+                    <div class="card-seta">→</div>
+                </a>
+
+                <!-- 02. Especialidades -->
+                <a href="/interface/especialidades/" class="card-modulo" data-busca="especialidades servicos oferecidos terapias fisioterapia psicologia artesanato">
+                    <div class="card-icone-wrap icone-verde">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path>
+                            <path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path>
+                            <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"></path>
+                            <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path>
+                        </svg>
+                    </div>
+                    <div class="card-info">
+                        <div class="card-cabecalho">
+                            <h3>Especialidades</h3>
+                        </div>
+                        <p class="card-desc">Serviços oferecidos, terapias e oficinas</p>
+                    </div>
+                    <div class="card-seta">→</div>
+                </a>
+
+                <!-- 03. Atendimentos -->
+                <a href="/interface/atendimentos/" class="card-modulo destaque-card" data-busca="atendimentos inicio alta historico sessoes retorno">
+                    <div class="card-icone-wrap icone-roxo">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <polyline points="10 9 9 9 8 9"></polyline>
+                        </svg>
+                    </div>
+                    <div class="card-info">
+                        <div class="card-cabecalho">
+                            <h3>Atendimentos</h3>
+                            <span class="badge-tag">Ativo</span>
+                        </div>
+                        <p class="card-desc">Início, alta e histórico individual de atendimentos</p>
+                    </div>
+                    <div class="card-seta">→</div>
+                </a>
+
+                <!-- 04. Profissionais -->
+                <a href="/interface/profissionais/" class="card-modulo" data-busca="profissionais cadastro vinculos equipe terapeutas voluntarios medicos">
+                    <div class="card-icone-wrap icone-ambar">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="8.5" cy="7" r="4"></circle>
+                            <line x1="20" y1="8" x2="20" y2="14"></line>
+                            <line x1="23" y1="11" x2="17" y2="11"></line>
+                        </svg>
+                    </div>
+                    <div class="card-info">
+                        <div class="card-cabecalho">
+                            <h3>Profissionais</h3>
+                        </div>
+                        <p class="card-desc">Cadastro de profissionais, voluntários e vínculos</p>
+                    </div>
+                    <div class="card-seta">→</div>
+                </a>
+
+                <!-- 05. Agenda -->
+                <a href="/interface/agenda/" class="card-modulo" data-busca="agenda dias horarios grade semanal turnos calendario">
+                    <div class="card-icone-wrap icone-azul">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                    </div>
+                    <div class="card-info">
+                        <div class="card-cabecalho">
+                            <h3>Agenda</h3>
+                        </div>
+                        <p class="card-desc">Grade de dias e horários semanais das atividades</p>
+                    </div>
+                    <div class="card-seta">→</div>
+                </a>
+
+                <!-- 06. Cursos -->
+                <a href="/interface/cursos/" class="card-modulo" data-busca="cursos capacitacao atividades oficinas refrigeracao eletrica artesanato">
+                    <div class="card-icone-wrap icone-verde">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                            <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+                        </svg>
+                    </div>
+                    <div class="card-info">
+                        <div class="card-cabecalho">
+                            <h3>Cursos</h3>
+                        </div>
+                        <p class="card-desc">Capacitação profissional, educação e oficinas</p>
+                    </div>
+                    <div class="card-seta">→</div>
+                </a>
+
+                <!-- 07. Relatórios -->
+                <a href="/interface/relatorios/" class="card-modulo destaque-card" data-busca="relatorios consultas indicadores pdf excel dados prestacao contas">
+                    <div class="card-icone-wrap icone-vermelho">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="18" y1="20" x2="18" y2="10"></line>
+                            <line x1="12" y1="20" x2="12" y2="4"></line>
+                            <line x1="6" y1="20" x2="6" y2="14"></line>
+                        </svg>
+                    </div>
+                    <div class="card-info">
+                        <div class="card-cabecalho">
+                            <h3>Relatórios</h3>
+                            <span class="badge-tag">PDF / XLS</span>
+                        </div>
+                        <p class="card-desc">Consultas analíticas, indicadores e exportação</p>
+                    </div>
+                    <div class="card-seta">→</div>
+                </a>
+
+                <!-- 08. Usuários -->
+                <a href="/interface/usuarios/" class="card-modulo" data-busca="usuarios acesso permissoes senhas seguranca perfis">
+                    <div class="card-icone-wrap icone-cinza">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                        </svg>
+                    </div>
+                    <div class="card-info">
+                        <div class="card-cabecalho">
+                            <h3>Usuários</h3>
+                        </div>
+                        <p class="card-desc">Controle de acesso, papéis e permissões do sistema</p>
+                    </div>
+                    <div class="card-seta">→</div>
+                </a>
+
+                <!-- 09. Dashboard -->
+                <a href="/interface/dashboard/" class="card-modulo" data-busca="dashboard visao geral estatisticas graficos metricas totais">
+                    <div class="card-icone-wrap icone-azul">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="14" width="7" height="7"></rect>
+                            <rect x="3" y="14" width="7" height="7"></rect>
+                        </svg>
+                    </div>
+                    <div class="card-info">
+                        <div class="card-cabecalho">
+                            <h3>Dashboard</h3>
+                        </div>
+                        <p class="card-desc">Visão geral com gráficos e métricas de acolhimento</p>
+                    </div>
+                    <div class="card-seta">→</div>
+                </a>
+
+                <!-- 10. Configurações -->
+                <a href="/interface/configuracoes/" class="card-modulo" data-busca="configuracoes historico alteracoes logs auditoria sistema">
+                    <div class="card-icone-wrap icone-cinza">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="3"></circle>
+                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                        </svg>
+                    </div>
+                    <div class="card-info">
+                        <div class="card-cabecalho">
+                            <h3>Configurações</h3>
+                        </div>
+                        <p class="card-desc">Histórico de alterações, auditoria e parâmetros</p>
+                    </div>
+                    <div class="card-seta">→</div>
+                </a>
+
+            </div>
+
+            <!-- Mensagem caso a busca não retorne nada -->
+            <div id="buscaVazia" class="busca-vazia" style="display: none;">
+                <p>Nenhum módulo encontrado com esse termo.</p>
+                <button type="button" onclick="limparBusca()">Ver todos os módulos</button>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Modal de Notificação Simples para Demonstração -->
+    <div id="modalAviso" class="modal-aviso">
+        <div class="modal-conteudo">
+            <h4 id="modalTitulo">Informação do Módulo</h4>
+            <p id="modalMensagem"></p>
+            <button type="button" class="botao-fechar-modal" onclick="fecharAviso()">Fechar</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container footer-conteudo">
+            <p>
+                © 2026 Casa Maria de Magdala — Apoio e Acolhimento a pessoas vivendo com HIV/AIDS.<br>
+                Ambiente de acesso restrito e seguro.
+            </p>
+
+            <div class="links-footer">
+                <a href="/interface/pessoas/">Consultar Pessoas</a>
+                <a href="/interface/login/">Sair do Sistema</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script JavaScript Separado e Modular -->
+    <script src="{% static 'js/interface/sistema.js' %}"></script>
+
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,266 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Atendimentos — Casa Maria de Magdala</title>
+  <link rel="stylesheet" href="{% static 'css/interface/sistema.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/interface/atendimentos.css' %}" />
+</head>
+<body>
+
+  <!-- ===== Cabeçalho do Sistema ===== -->
+  <header class="cabecalho-sistema">
+    <div class="container-cabecalho">
+      <div class="logo-sistema">
+        <svg width="32" height="32" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <circle cx="24" cy="24" r="24" fill="#1a4fb4"/>
+          <path d="M24 10 L24 38 M10 24 L38 24" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+        </svg>
+        <span>Casa Maria de Magdala</span>
+      </div>
+      <nav class="nav-sistema">
+        <a href="/interface/sistema/" class="btn-nav">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+          Voltar ao Painel
+        </a>
+        <a href="/interface/login/" class="btn-nav btn-nav-sair">Sair</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== Conteúdo Principal ===== -->
+  <main class="container principal-atend">
+
+    <div class="painel-topo">
+      <div>
+        <h1>Atendimentos</h1>
+        <p class="subtitulo-pag">Início, alta e histórico de atendimentos</p>
+      </div>
+      <button class="botao-primario" onclick="abrirNovoAtendimento()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        + Novo Atendimento
+      </button>
+    </div>
+
+    <!-- Abas de Situação -->
+    <div class="abas-atend">
+      <button type="button" class="tab-atend ativo" data-tab="ativo" onclick="filtrarSituacao('ativo', this)">Ativos (3)</button>
+      <button type="button" class="tab-atend" data-tab="encerrado" onclick="filtrarSituacao('encerrado', this)">Encerrados (1)</button>
+      <button type="button" class="tab-atend" data-tab="cancelado" onclick="filtrarSituacao('cancelado', this)">Cancelados (1)</button>
+      <button type="button" class="tab-atend" data-tab="todos" onclick="filtrarSituacao('todos', this)">Todos (5)</button>
+    </div>
+
+    <!-- Tabela de Atendimentos -->
+    <div class="tabela-container">
+      <table class="tabela-dados" id="tabelaAtendimentos">
+        <thead>
+          <tr>
+            <th>Pessoa</th>
+            <th>Especialidade</th>
+            <th>Profissional</th>
+            <th>Data de Início</th>
+            <th>Situação</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="corpoAtendimentos">
+          <!-- Linha 1: Ativo -->
+          <tr data-situacao="ativo" data-nome="Maria Silva" data-especialidade="Fisioterapia médica" data-inicio="03/03/2026">
+            <td><strong>Maria Silva</strong></td>
+            <td>Fisioterapia médica</td>
+            <td>Cristina</td>
+            <td>03/03/2026</td>
+            <td><span class="badge-status badge-ativo">Ativo</span></td>
+            <td class="acoes-tabela">
+              <button type="button" class="btn-acao-tabela btn-registrar-alta" onclick="registrarAlta('Maria Silva', 'Fisioterapia médica', '03/03/2026')">Registrar Alta</button>
+              <a href="/interface/pessoas/" class="btn-acao-tabela">Ver Ficha</a>
+            </td>
+          </tr>
+
+          <!-- Linha 2: Ativo -->
+          <tr data-situacao="ativo" data-nome="João Santos" data-especialidade="Psicologia" data-inicio="10/01/2026">
+            <td><strong>João Santos</strong></td>
+            <td>Psicologia</td>
+            <td>Valéria</td>
+            <td>10/01/2026</td>
+            <td><span class="badge-status badge-ativo">Ativo</span></td>
+            <td class="acoes-tabela">
+              <button type="button" class="btn-acao-tabela btn-registrar-alta" onclick="registrarAlta('João Santos', 'Psicologia', '10/01/2026')">Registrar Alta</button>
+              <a href="/interface/pessoas/" class="btn-acao-tabela">Ver Ficha</a>
+            </td>
+          </tr>
+
+          <!-- Linha 3: Encerrado -->
+          <tr data-situacao="encerrado" data-nome="Ana Oliveira" data-especialidade="Nutrição" data-inicio="15/02/2026">
+            <td><strong>Ana Oliveira</strong></td>
+            <td>Nutrição</td>
+            <td>Bruna</td>
+            <td>15/02/2026</td>
+            <td><span class="badge-status badge-encerrado">Encerrado</span></td>
+            <td class="acoes-tabela">
+              <a href="/interface/pessoas/" class="btn-acao-tabela">Ver Ficha</a>
+            </td>
+          </tr>
+
+          <!-- Linha 4: Ativo -->
+          <tr data-situacao="ativo" data-nome="Carlos Lima" data-especialidade="Acupuntura" data-inicio="20/03/2026">
+            <td><strong>Carlos Lima</strong></td>
+            <td>Acupuntura</td>
+            <td>Alessandra</td>
+            <td>20/03/2026</td>
+            <td><span class="badge-status badge-ativo">Ativo</span></td>
+            <td class="acoes-tabela">
+              <button type="button" class="btn-acao-tabela btn-registrar-alta" onclick="registrarAlta('Carlos Lima', 'Acupuntura', '20/03/2026')">Registrar Alta</button>
+              <a href="/interface/pessoas/" class="btn-acao-tabela">Ver Ficha</a>
+            </td>
+          </tr>
+
+          <!-- Linha 5: Cancelado -->
+          <tr data-situacao="cancelado" data-nome="Paula Costa" data-especialidade="Crochê" data-inicio="05/04/2026">
+            <td><strong>Paula Costa</strong></td>
+            <td>Crochê</td>
+            <td>Wanda</td>
+            <td>05/04/2026</td>
+            <td><span class="badge-status badge-cancelado">Cancelado</span></td>
+            <td class="acoes-tabela">
+              <a href="/interface/pessoas/" class="btn-acao-tabela">Ver Ficha</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </main>
+
+  <!-- ===== Rodapé ===== -->
+  <footer class="rodape-sistema">
+    <div class="container-rodape">
+      <span>Sistema de Gestão — Casa Maria de Magdala</span>
+      <div class="links-rodape">
+        <a href="/interface/pessoas/">Pessoas</a>
+        <a href="/interface/profissionais/">Profissionais</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== Modal: Novo Atendimento ===== -->
+  <div class="modal-aviso" id="modalNovoAtend">
+    <div class="modal-conteudo modal-grande">
+      <h2>Novo Atendimento</h2>
+
+      <div class="campo-form">
+        <label for="novoAtendPessoa">Pessoa atendida *</label>
+        <select id="novoAtendPessoa">
+          <option value="">Selecione uma pessoa...</option>
+          <option value="Maria Silva">Maria Silva</option>
+          <option value="João Santos">João Santos</option>
+          <option value="Ana Oliveira">Ana Oliveira</option>
+          <option value="Carlos Lima">Carlos Lima</option>
+          <option value="Paula Costa">Paula Costa</option>
+        </select>
+      </div>
+
+      <div class="campo-form">
+        <label for="novoAtendEspecialidade">Especialidade *</label>
+        <select id="novoAtendEspecialidade">
+          <option value="">Selecione a especialidade...</option>
+          <optgroup label="Terapêutica">
+            <option value="Fisioterapia médica">Fisioterapia médica</option>
+            <option value="Fisioterapia pediátrica">Fisioterapia pediátrica</option>
+            <option value="Fonoaudiologia">Fonoaudiologia</option>
+            <option value="Acupuntura">Acupuntura</option>
+            <option value="Massagem terapêutica">Massagem terapêutica</option>
+            <option value="Reflexologia">Reflexologia</option>
+            <option value="Reiki">Reiki</option>
+            <option value="Nutrição">Nutrição</option>
+            <option value="Psicologia">Psicologia</option>
+            <option value="Assistência jurídica">Assistência jurídica</option>
+            <option value="Serviço social">Serviço social</option>
+          </optgroup>
+          <optgroup label="Artesanato">
+            <option value="Pintura em tecido">Pintura em tecido</option>
+            <option value="Crochê">Crochê</option>
+            <option value="Bijuteria">Bijuteria</option>
+            <option value="Costura criativa">Costura criativa</option>
+          </optgroup>
+          <optgroup label="Capacitação">
+            <option value="Refrigeração">Refrigeração</option>
+            <option value="Manutenção de máquina de lavar">Manutenção de máquina de lavar</option>
+            <option value="Manutenção de micro-ondas">Manutenção de micro-ondas</option>
+          </optgroup>
+          <optgroup label="Educação e Cultura">
+            <option value="Reforço escolar">Reforço escolar</option>
+            <option value="Teatro">Teatro</option>
+            <option value="Informática básica">Informática básica</option>
+            <option value="Alfabetização de adultos">Alfabetização de adultos</option>
+          </optgroup>
+        </select>
+      </div>
+
+      <div class="campo-form">
+        <label for="novoAtendProfissional">Profissional responsável</label>
+        <select id="novoAtendProfissional">
+          <option value="">Selecione o profissional (opcional)...</option>
+          <option value="Cristina">Cristina</option>
+          <option value="Mara">Mara</option>
+          <option value="Valéria">Valéria</option>
+          <option value="Ana Maria">Ana Maria</option>
+          <option value="João">João</option>
+          <option value="Dra. Elvira">Dra. Elvira</option>
+          <option value="Telma">Telma</option>
+          <option value="Maria Helena">Maria Helena</option>
+          <option value="Wanda">Wanda</option>
+          <option value="Bruna">Bruna</option>
+          <option value="Alessandra">Alessandra</option>
+          <option value="Andréa">Andréa</option>
+        </select>
+      </div>
+
+      <div class="campo-form">
+        <label for="novoAtendDate">Data de Início *</label>
+        <input type="date" id="novoAtendDate" />
+      </div>
+
+      <div class="modal-botoes">
+        <button type="button" class="btn-modal-sec" onclick="fecharNovoAtendimento()">Cancelar</button>
+        <button type="button" class="btn-modal-prim" onclick="salvarNovoAtendimento()">Salvar Atendimento</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Modal: Registrar Alta ===== -->
+  <div class="modal-aviso" id="modalAlta">
+    <div class="modal-conteudo">
+      <h3 id="tituloModalAlta">Registrar Alta</h3>
+      <p id="detalhesAlta" class="subtitulo-alta"></p>
+
+      <div class="campo-form">
+        <label for="dataAlta">Data de Alta *</label>
+        <input type="date" id="dataAlta" />
+      </div>
+
+      <div class="campo-form">
+        <label for="obsAlta">Observações</label>
+        <textarea id="obsAlta" placeholder="Observações e motivo da alta..."></textarea>
+      </div>
+
+      <div class="aviso-erro" id="erroAlta">
+        A data de alta não pode ser anterior à data de início do atendimento.
+      </div>
+
+      <div class="modal-botoes">
+        <button type="button" class="btn-modal-sec" onclick="fecharModalAlta()">Cancelar</button>
+        <button type="button" class="btn-modal-prim" onclick="confirmarAlta()">Confirmar Alta</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast-sucesso" id="toastAtendimentos"></div>
+
+  <script src="{% static 'js/interface/atendimentos.js' %}"></script>
+  <script src="{% static 'js/interface/excluir.js' %}"></script>
+</body>
+</html>

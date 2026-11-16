@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Especialidades | Casa Maria de Magdala{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/especialidades.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container principal-espec">
+
+    <div class="painel-topo">
+        <div>
+            <a href="{% url 'dashboard' %}" class="link-voltar-esp">← Voltar ao painel</a>
+            <h1>Especialidades e Serviços</h1>
+            <p class="subtitulo-esp">{{ total }} especialidades em 4 categorias, confirmadas pela coordenação da ONG.</p>
+        </div>
+        <button type="button" class="botao-primario" onclick="abrirModal('modalNova')">+ Nova Especialidade</button>
+    </div>
+
+    {% if messages %}
+    <div class="mensagens">
+        {% for m in messages %}
+        <div class="mensagem mensagem-{{ m.tags }}">{{ m }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="filtros-categoria">
+        <button type="button" class="btn-categoria ativo" onclick="filtrarCategoria('todas', this)">Todas</button>
+        {% for g in grupos %}
+        <button type="button" class="btn-categoria" onclick="filtrarCategoria('{{ g.valor }}', this)">{{ g.titulo }} ({{ g.itens|length }})</button>
+        {% endfor %}
+    </div>
+
+    {% for g in grupos %}
+    <section class="secao-categoria" data-grupo="{{ g.valor }}">
+        <h2>{{ g.titulo }}</h2>
+
+        <div class="grade-especialidades">
+            {% for e in g.itens %}
+            <div class="card-especialidade">
+                <div class="esp-topo">
+                    <span class="esp-nome">{{ e.nome }}</span>
+                    <span class="esp-badge {% if e.ativa %}badge-ativo{% else %}badge-inativo{% endif %}">
+                        {% if e.ativa %}Ativa{% else %}Inativa{% endif %}
+                    </span>
+                </div>
+                <div class="esp-rodape">
+                    <span class="esp-atendimentos">{{ e.ativos }} acompanhamento{{ e.ativos|pluralize }} ativo{{ e.ativos|pluralize }}</span>
+                    <div class="esp-acoes">
+                        <button type="button" class="btn-acao-esp" title="Editar"
+                            data-id="{{ e.id }}" data-nome="{{ e.nome }}"
+                            data-categoria="{{ e.categoria }}" data-ativa="{% if e.ativa %}1{% else %}0{% endif %}"
+                            onclick="abrirEdicao(this)">✏️</button>
+                        <button type="button" class="btn-acao-esp" title="Excluir"
+                            data-id="{{ e.id }}" data-nome="{{ e.nome }}"
+                            onclick="abrirExclusao(this)">🗑️</button>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <p class="sem-itens">Nenhuma especialidade nesta categoria.</p>
+            {% endfor %}
+        </div>
+    </section>
+    {% endfor %}
+</div>
+
+<!-- Modal: nova -->
+<div id="modalNova" class="modal-esp">
+    <form method="POST" action="{% url 'criar_especialidade' %}" class="modal-esp-conteudo">
+        {% csrf_token %}
+        <h3>Nova especialidade</h3>
+        <label>Nome *</label>
+        <input type="text" name="nome" maxlength="100" required>
+        <label>Categoria *</label>
+        <select name="categoria" required>
+            <option value="">Selecione</option>
+            {% for valor, titulo in categorias %}
+            <option value="{{ valor }}">{{ titulo }}</option>
+            {% endfor %}
+        </select>
+        <div class="modal-botoes">
+            <button type="button" class="btn-sec" onclick="fecharModais()">Cancelar</button>
+            <button type="submit" class="btn-prim">Salvar</button>
+        </div>
+    </form>
+</div>
+
+<!-- Modal: editar (o JS preenche o action e os campos) -->
+<div id="modalEditar" class="modal-esp">
+    <form method="POST" id="formEditar" class="modal-esp-conteudo">
+        {% csrf_token %}
+        <h3>Editar especialidade</h3>
+        <label>Nome *</label>
+        <input type="text" name="nome" id="editNome" maxlength="100" required>
+        <label>Categoria *</label>
+        <select name="categoria" id="editCategoria" required>
+            {% for valor, titulo in categorias %}
+            <option value="{{ valor }}">{{ titulo }}</option>
+            {% endfor %}
+        </select>
+        <label class="check"><input type="checkbox" name="ativa" id="editAtiva"> Especialidade ativa</label>
+        <div class="modal-botoes">
+            <button type="button" class="btn-sec" onclick="fecharModais()">Cancelar</button>
+            <button type="submit" class="btn-prim">Salvar alterações</button>
+        </div>
+    </form>
+</div>
+
+<!-- Modal: excluir -->
+<div id="modalExcluir" class="modal-esp">
+    <form method="POST" id="formExcluir" class="modal-esp-conteudo">
+        {% csrf_token %}
+        <h3>Excluir especialidade</h3>
+        <p>Excluir <strong id="excluirNome"></strong>? Essa ação não pode ser desfeita.</p>
+        <div class="modal-botoes">
+            <button type="button" class="btn-sec" onclick="fecharModais()">Cancelar</button>
+            <button type="submit" class="btn-perigo">Excluir</button>
+        </div>
+    </form>
+</div>
+
+<script src="{% static 'js/especialidades.js' %}"></script>
+{% endblock %}
